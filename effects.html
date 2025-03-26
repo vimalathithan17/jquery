@@ -7,95 +7,321 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         .box {
-            width: 100px;
+            width: 200px;
             height: 100px;
             background-color: lightblue;
-            margin: 10px;
+            border: 2px solid black;
+            display: block;
+            margin: 20px auto;
             text-align: center;
             line-height: 100px;
             font-weight: bold;
         }
+        .control-panel {
+            margin: 10px 0;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            white-space: pre-wrap;
+        }
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1,h2,h3{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-
-    <h2>jQuery Effects Methods Example</h2>
-
-    <table>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="selectors.html">Selectors</a>
+        <a href="event.html">Events</a>
+        <a href="effects.html">Effects</a>
+        <a href="dom.html">DOM Manipulation</a>
+        <a href="domTraversal.html">DOM Traversal</a>
+        <a href="css.html">CSS Manipulation</a>
+        <a href="iternTransform.html">Iteration & Transformation</a>
+        <a href="chain.html">Chaining</a>
+        <a href="ajax.html">AJAX</a>
+        <a href="util.html">Utility Functions</a>
+    </nav>
+    <h2>jQuery Effects Methods - Table</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
         <tr>
             <th>Method</th>
+            <th>Syntax</th>
+            <th>Options (Enumerated if Finite)</th>
+            <th>Default Values</th>
             <th>Description</th>
+            <th>Callback Parameters</th>
         </tr>
         <tr>
-            <td><code>show(speed)</code></td>
-            <td>Gradually shows the element</td>
+            <td>.show()</td>
+            <td>$(selector).show(<b>speed?</b>, <b>easing?</b>, <b>callback?</b>)</td>
+            <td>
+                <b>speed:</b> "slow", "fast", milliseconds <br>
+                <b>easing:</b> "swing", "linear"
+            </td>
+            <td>
+                <b>speed:</b> 400ms <br>
+                <b>easing:</b> "swing"
+            </td>
+            <td>Displays a hidden element.</td>
+            <td>None (<code>this</code> refers to the element)</td>
         </tr>
         <tr>
-            <td><code>hide(speed)</code></td>
-            <td>Gradually hides the element</td>
+            <td>.hide()</td>
+            <td>$(selector).hide(<b>speed?</b>, <b>easing?</b>, <b>callback?</b>)</td>
+            <td>Same as .show()</td>
+            <td>Same as .show()</td>
+            <td>Hides an element.</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td><code>toggle(speed)</code></td>
-            <td>Toggles visibility</td>
+            <td>.toggle()</td>
+            <td>$(selector).toggle(<b>speed?</b>, <b>easing?</b>, <b>callback?</b>)</td>
+            <td>Same as .show()</td>
+            <td>Same as .show()</td>
+            <td>Toggles visibility.</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td><code>fadeIn(speed)</code></td>
-            <td>Fades in the element</td>
+            <td>.fadeIn()</td>
+            <td>$(selector).fadeIn(<b>speed?</b>, <b>easing?</b>, <b>callback?</b>)</td>
+            <td>Same as .show()</td>
+            <td>Same as .show()</td>
+            <td>Fades in an element.</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td><code>fadeOut(speed)</code></td>
-            <td>Fades out the element</td>
+            <td>.fadeOut()</td>
+            <td>$(selector).fadeOut(<b>speed?</b>, <b>easing?</b>, <b>callback?</b>)</td>
+            <td>Same as .show()</td>
+            <td>Same as .show()</td>
+            <td>Fades out an element.</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td><code>fadeToggle(speed)</code></td>
-            <td>Toggles fade effect</td>
+            <td>.fadeToggle()</td>
+            <td>$(selector).fadeToggle(<b>speed?</b>, <b>easing?</b>, <b>callback?</b>)</td>
+            <td>Same as .show()</td>
+            <td>Same as .show()</td>
+            <td>Toggles fade in/out.</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td><code>fadeTo(speed, opacity)</code></td>
-            <td>Fades to a specific opacity</td>
+            <td>.fadeTo()</td>
+            <td>$(selector).fadeTo(<b>speed</b>, <b>opacity</b>, <b>callback?</b>)</td>
+            <td><b>opacity:</b> 0.0 - 1.0</td>
+            <td><b>opacity:</b> Required</td>
+            <td>Fades to a specific opacity.</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td><code>slideDown(speed)</code></td>
-            <td>Slides the element down</td>
+            <td>.slideDown()</td>
+            <td>$(selector).slideDown(<b>speed?</b>, <b>easing?</b>, <b>callback?</b>)</td>
+            <td>Same as .show()</td>
+            <td>Same as .show()</td>
+            <td>Slides an element down.</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td><code>slideUp(speed)</code></td>
-            <td>Slides the element up</td>
+            <td>.slideUp()</td>
+            <td>$(selector).slideUp(<b>speed?</b>, <b>easing?</b>, <b>callback?</b>)</td>
+            <td>Same as .show()</td>
+            <td>Same as .show()</td>
+            <td>Slides an element up.</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td><code>slideToggle(speed)</code></td>
-            <td>Toggles slide effect</td>
+            <td>.slideToggle()</td>
+            <td>$(selector).slideToggle(<b>speed?</b>, <b>easing?</b>, <b>callback?</b>)</td>
+            <td>Same as .show()</td>
+            <td>Same as .show()</td>
+            <td>Slides up/down.</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td><code>animate({properties}, speed)</code></td>
-            <td>Animates CSS properties</td>
+            <td>.animate()</td>
+            <td>$(selector).animate(<b>properties</b>, <b>duration?</b>, <b>easing?</b>, <b>callback?</b>)</td>
+            <td><b>properties:</b> { cssProperty: value }</td>
+            <td><b>duration:</b> 400ms <br> <b>easing:</b> "swing"</td>
+            <td>Animates CSS properties.</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td><code>stop()</code></td>
-            <td>Stops the current animation</td>
+            <td>.stop()</td>
+            <td>$(selector).stop(<b>clearQueue?</b>, <b>jumpToEnd?</b>)</td>
+            <td>
+                <b>clearQueue:</b> true, false <br>
+                <b>jumpToEnd:</b> true, false
+            </td>
+            <td><b>clearQueue:</b> false <br> <b>jumpToEnd:</b> false</td>
+            <td>Stops animations/effects.</td>
+            <td>None</td>
         </tr>
         <tr>
-            <td><code>delay(ms)</code></td>
-            <td>Delays an animation</td>
+            <td>.delay()</td>
+            <td>$(selector).delay(<b>time</b>)</td>
+            <td><b>time:</b> milliseconds</td>
+            <td><b>time:</b> Required</td>
+            <td>Delays execution of the next function.</td>
+            <td>None</td>
         </tr>
     </table>
-    <button id="btn-show">Show</button>
-    <button id="btn-hide">Hide</button>
-    <button id="btn-toggle">Toggle</button>
-    <button id="btn-fadein">Fade In</button>
-    <button id="btn-fadeout">Fade Out</button>
-    <button id="btn-fadetoggle">Fade Toggle</button>
-    <button id="btn-fadeto">Fade To 50%</button>
-    <button id="btn-slidedown">Slide Down</button>
-    <button id="btn-slideup">Slide Up</button>
-    <button id="btn-slidetoggle">Slide Toggle</button>
-    <button id="btn-animate">Animate</button>
-    <button id="btn-stop">Stop</button>
-    <button id="btn-delay">Delayed Animation</button>
+    
 
-    <div id="box" class="box">Box</div>
+    <h2>Interactive jQuery Effects Demo</h2>
 
-    <script src="effects.js"></script>
+    <div class="box">Hello!</div>
+
+    <div class="control-panel">
+        <h3>Basic Effects</h3>
+        <button id="show">Show</button>
+        <button id="hide">Hide</button>
+        <button id="toggle">Toggle</button>
+    </div>
+
+    <div class="control-panel">
+        <h3>Fade Effects</h3>
+        <button id="fade-in">Fade In</button>
+        <button id="fade-out">Fade Out</button>
+        <button id="fade-toggle">Fade Toggle</button>
+        <button id="fade-to">Fade To (50%)</button>
+    </div>
+
+    <div class="control-panel">
+        <h3>Slide Effects</h3>
+        <button id="slide-down">Slide Down</button>
+        <button id="slide-up">Slide Up</button>
+        <button id="slide-toggle">Slide Toggle</button>
+    </div>
+
+    <div class="control-panel">
+        <h3>Animation & Delay</h3>
+        <button id="animate">Animate</button>
+        <button id="stop">Stop Animation</button>
+        <button id="delay">Delay + Show</button>
+    </div>
+
+    <div class="control-panel">
+        <h3>Reset</h3>
+        <button id="reset">Reset Box</button>
+    </div>
+
+    <h3>Output:</h3>
+    <pre id="output">Click a button to see results...</pre>
+
+    <script>
+        $(document).ready(function () {
+            const box = $(".box");
+            const output = $("#output");
+
+            // Store original properties
+            const originalState = {
+                width: box.width(),
+                height: box.height(),
+                backgroundColor: box.css("background-color"),
+                border: box.css("border"),
+                display: "block",
+                opacity: 1
+            };
+
+            function log(action, code) {
+                output.html(`${action}\n\nExecuted Code:\n<code>${code}</code>`);
+            }
+
+            // Basic Effects
+            $("#show").click(function () {
+                box.show();
+                log("Box is shown.", '$(".box").show();');
+            });
+
+            $("#hide").click(function () {
+                box.hide();
+                log("Box is hidden.", '$(".box").hide();');
+            });
+
+            $("#toggle").click(function () {
+                box.toggle();
+                log("Box toggled.", '$(".box").toggle();');
+            });
+
+            // Fade Effects
+            $("#fade-in").click(function () {
+                box.fadeIn();
+                log("Box faded in.", '$(".box").fadeIn();');
+            });
+
+            $("#fade-out").click(function () {
+                box.fadeOut();
+                log("Box faded out.", '$(".box").fadeOut();');
+            });
+
+            $("#fade-toggle").click(function () {
+                box.fadeToggle();
+                log("Box fade toggled.", '$(".box").fadeToggle();');
+            });
+
+            $("#fade-to").click(function () {
+                box.fadeTo("slow", 0.5);
+                log("Box faded to 50% opacity.", '$(".box").fadeTo("slow", 0.5);');
+            });
+
+            // Slide Effects
+            $("#slide-down").click(function () {
+                box.slideDown();
+                log("Box slid down.", '$(".box").slideDown();');
+            });
+
+            $("#slide-up").click(function () {
+                box.slideUp();
+                log("Box slid up.", '$(".box").slideUp();');
+            });
+
+            $("#slide-toggle").click(function () {
+                box.slideToggle();
+                log("Box slide toggled.", '$(".box").slideToggle();');
+            });
+
+            // Animation & Delay
+            $("#animate").click(function () {
+                box.animate({ width: "300px", height: "150px" }, "slow");
+                log("Box is animating.", '$(".box").animate({ width: "300px", height: "150px" }, "slow");');
+            });
+
+            $("#stop").click(function () {
+                box.stop();
+                log("Animation stopped.", '$(".box").stop();');
+            });
+
+            $("#delay").click(function () {
+                box.hide().delay(1000).fadeIn();
+                log("Box will show after 1 second.", '$(".box").hide().delay(1000).fadeIn();');
+            });
+
+            // Reset Box
+            $("#reset").click(function () {
+                box.stop(true, true).css(originalState).show();
+                log("Box reset to original state.", '$(".box").stop(true, true).css(originalState).show();');
+            });
+        });
+    </script>
 
 </body>
 </html>

@@ -3,18 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jQuery AJAX - All Methods</title>
+    <title>jQuery AJAX Methods Demonstration</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        #loading { display: none; color: red; }
-        #output { margin-top: 10px; white-space: pre-wrap; }
-        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-        th, td { border: 1px solid black; padding: 8px; text-align: left; }
-        th { background-color: lightgray; }
+        h1,h2,h3{
+            text-align: center;
+        }
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        button { margin: 5px; padding: 8px; }
+        pre { background: #f4f4f4; padding: 10px; border: 1px solid #ddd; }
+        #loading { display: none; color: red; font-weight: bold; }
     </style>
 </head>
 <body>
-
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="selectors.html">Selectors</a>
+        <a href="event.html">Events</a>
+        <a href="effects.html">Effects</a>
+        <a href="dom.html">DOM Manipulation</a>
+        <a href="domTraversal.html">DOM Traversal</a>
+        <a href="css.html">CSS Manipulation</a>
+        <a href="iternTransform.html">Iteration & Transformation</a>
+        <a href="chain.html">Chaining</a>
+        <a href="ajax.html">AJAX</a>
+        <a href="util.html">Utility Functions</a>
+    </nav>
     <h2>jQuery AJAX - All Methods</h2>
 
     <button id="btn-get">$.get()</button>
@@ -25,11 +54,14 @@
     <button id="btn-parsejson">$.parseJSON()</button>
     <button id="btn-param">$.param()</button>
 
+    <h3>Loading Indicator</h3>
     <div id="loading">Loading...</div>
-    <div id="output"></div>
+
+    <h3>Output:</h3>
+    <pre id="output"></pre>
 
     <h3>AJAX Methods Table</h3>
-    <table>
+    <table border="1" cellpadding="8" cellspacing="0">
         <tr>
             <th>Method</th>
             <th>Syntax</th>
@@ -67,7 +99,129 @@
         </tr>
     </table>
 
-    <script src="ajax.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            // Global AJAX Events
+            $(document).ajaxStart(function() {
+                $("#loading").show();
+            }).ajaxStop(function() {
+                $("#loading").hide();
+            });
+
+            $(document).ajaxComplete(function() {
+                console.log("AJAX request completed");
+            });
+
+            $(document).ajaxError(function(event, xhr, settings, error) {
+                console.log("AJAX error:", error);
+                $("#output").html("AJAX Error: " + error);
+            });
+
+            function displayResult(title, code, result) {
+                $("#output").html(
+                    "<b>" + title + "</b>\n" +
+                    "<b>Executed Code:</b>\n" + code + "\n\n" +
+                    "<b>Response:</b>\n" + JSON.stringify(result, null, 4)
+                );
+            }
+
+            // $.get() - Fetch a post
+            $("#btn-get").click(function() {
+                var code = `$.get("https://jsonplaceholder.typicode.com/posts/1")`;
+                $.get("https://jsonplaceholder.typicode.com/posts/1")
+                    .done(function(response) {
+                        displayResult("GET Request", code, response);
+                    })
+                    .fail(function(xhr, status, error) {
+                        displayResult("GET Request Failed", code, error);
+                    });
+            });
+
+            // $.post() - Create a post
+            $("#btn-post").click(function() {
+                var code = `$.post("https://jsonplaceholder.typicode.com/posts", { title: "New Post", body: "Test", userId: 1 })`;
+                $.post("https://jsonplaceholder.typicode.com/posts", {
+                    title: "New Post",
+                    body: "This is a test post.",
+                    userId: 1
+                })
+                .done(function(response) {
+                    displayResult("POST Request", code, response);
+                })
+                .fail(function(xhr, status, error) {
+                    displayResult("POST Request Failed", code, error);
+                });
+            });
+
+            // $.getJSON() - Fetch JSON data
+            $("#btn-getjson").click(function() {
+                var code = `$.getJSON("https://jsonplaceholder.typicode.com/posts/1")`;
+                $.getJSON("https://jsonplaceholder.typicode.com/posts/1")
+                    .done(function(response) {
+                        displayResult("GETJSON Request", code, response);
+                    })
+                    .fail(function(xhr, status, error) {
+                        displayResult("GETJSON Request Failed", code, error);
+                    });
+            });
+
+            // PUT request
+            $("#btn-put").click(function() {
+                var code = `$.ajax({ url: "...", method: "PUT", data: JSON.stringify({ id: 1, title: "Updated", body: "Updated content", userId: 1 }) })`;
+                $.ajax({
+                    url: "https://jsonplaceholder.typicode.com/posts/1",
+                    method: "PUT",
+                    data: JSON.stringify({
+                        id: 1,
+                        title: "Updated Post",
+                        body: "This post has been updated.",
+                        userId: 1
+                    }),
+                    contentType: "application/json",
+                    dataType: "json"
+                })
+                .done(function(response) {
+                    displayResult("PUT Request", code, response);
+                })
+                .fail(function(xhr, status, error) {
+                    displayResult("PUT Request Failed", code, error);
+                });
+            });
+
+            // DELETE request
+            $("#btn-delete").click(function() {
+                var code = `$.ajax({ url: "...", method: "DELETE" })`;
+                $.ajax({
+                    url: "https://jsonplaceholder.typicode.com/posts/1",
+                    method: "DELETE"
+                })
+                .done(function(response) {
+                    displayResult("DELETE Request", code, "Post deleted successfully.");
+                })
+                .fail(function(xhr, status, error) {
+                    displayResult("DELETE Request Failed", code, error);
+                });
+            });
+
+            // $.parseJSON() - Parse JSON string
+            $("#btn-parsejson").click(function() {
+                var code = `$.parseJSON('{"name": "Alice", "age": 25}')`;
+                let jsonString = '{"name": "Alice", "age": 25}';
+                let parsed = $.parseJSON(jsonString);
+                displayResult("Parse JSON", code, parsed);
+            });
+
+            // $.param() - Serialize object to query string
+            $("#btn-param").click(function() {
+                var code = `$.param({ name: "John", age: 30 })`;
+                let obj = { name: "John", age: 30 };
+                let queryString = $.param(obj);
+                displayResult("Serialized Query String", code, queryString);
+            });
+
+        });
+    </script>
 
 </body>
 </html>

@@ -6,116 +6,438 @@
     <title>jQuery DOM Manipulation Demo</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        .box { padding: 10px; border: 2px solid black; margin: 5px; }
-        .highlight { background-color: yellow; }
-        .wrapper { border: 3px dashed blue; padding: 10px; margin: 10px; }
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 20px;
+            padding: 10px;
+            border: 2px solid black;
+        }
+        .target {
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid blue;
+            display: inline-block;
+            width: 200px;
+            text-align: center;
+        }
+        .buttons {
+            margin: 20px 0;
+        }
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+        }
+        .highlight {
+            background-color: yellow;
+            border: 2px dashed red;
+            padding: 5px;
+        }
+        #output-box {
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid green;
+            min-height: 30px;
+            background-color: #f4fff4;
+            font-weight: bold;
+        }
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1,h2,h3{
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-
-    <h2>jQuery DOM Manipulation Example</h2>
-    <table>
-        <tr>
-            <th>Method</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td><code>text("new text")</code></td>
-            <td>Changes the text inside an element</td>
-        </tr>
-        <tr>
-            <td><code>html("&lt;b&gt;new html&lt;/b&gt;")</code></td>
-            <td>Replaces the content with new HTML</td>
-        </tr>
-        <tr>
-            <td><code>val("new value")</code></td>
-            <td>Changes the value of an input field</td>
-        </tr>
-        <tr>
-            <td><code>append("new element")</code></td>
-            <td>Adds content at the end of an element</td>
-        </tr>
-        <tr>
-            <td><code>prepend("new element")</code></td>
-            <td>Adds content at the beginning of an element</td>
-        </tr>
-        <tr>
-            <td><code>after("new element")</code></td>
-            <td>Inserts new content after an element</td>
-        </tr>
-        <tr>
-            <td><code>before("new element")</code></td>
-            <td>Inserts new content before an element</td>
-        </tr>
-        <tr>
-            <td><code>appendTo(selector)</code></td>
-            <td>Moves an element inside another element at the end</td>
-        </tr>
-        <tr>
-            <td><code>prependTo(selector)</code></td>
-            <td>Moves an element inside another element at the beginning</td>
-        </tr>
-        <tr>
-            <td><code>remove()</code></td>
-            <td>Removes an element and its events</td>
-        </tr>
-        <tr>
-            <td><code>empty()</code></td>
-            <td>Clears all child elements inside a container</td>
-        </tr>
-        <tr>
-            <td><code>detach()</code></td>
-            <td>Removes an element but keeps its events</td>
-        </tr>
-        <tr>
-            <td><code>wrap("&lt;div&gt;")</code></td>
-            <td>Wraps an element inside another element</td>
-        </tr>
-        <tr>
-            <td><code>wrapAll("&lt;div&gt;")</code></td>
-            <td>Wraps all selected elements inside one wrapper</td>
-        </tr>
-        <tr>
-            <td><code>unwrap()</code></td>
-            <td>Removes the wrapper of an element</td>
-        </tr>
-        <tr>
-            <td><code>attr("attrName", "value")</code></td>
-            <td>Sets an attribute for an element</td>
-        </tr>
-        <tr>
-            <td><code>removeAttr("attrName")</code></td>
-            <td>Removes an attribute from an element</td>
-        </tr>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="selectors.html">Selectors</a>
+        <a href="event.html">Events</a>
+        <a href="effects.html">Effects</a>
+        <a href="dom.html">DOM Manipulation</a>
+        <a href="domTraversal.html">DOM Traversal</a>
+        <a href="css.html">CSS Manipulation</a>
+        <a href="iternTransform.html">Iteration & Transformation</a>
+        <a href="chain.html">Chaining</a>
+        <a href="ajax.html">AJAX</a>
+        <a href="util.html">Utility Functions</a>
+    </nav>
+    <h2>jQuery DOM Manipulation</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Function</th>
+                <th>Syntax</th>
+                <th>Description</th>
+                <th>Parameters</th>
+                <th>Optional?</th>
+                <th>Default Value</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <!-- Text & HTML Methods -->
+            <tr>
+                <td><code>.text()</code></td>
+                <td><code>$(selector).text()</code> <br> <code>$(selector).text(value)</code></td>
+                <td>Gets or sets the text content of elements.</td>
+                <td>
+                    <code>value</code> (string or function) - The new text content.
+                </td>
+                <td>✅</td>
+                <td>Returns current text if no parameter is passed.</td>
+            </tr>
+    
+            <tr>
+                <td><code>.html()</code></td>
+                <td><code>$(selector).html()</code> <br> <code>$(selector).html(value)</code></td>
+                <td>Gets or sets the HTML content of elements.</td>
+                <td>
+                    <code>value</code> (string or function) - The new HTML content.
+                </td>
+                <td>✅</td>
+                <td>Returns current HTML if no parameter is passed.</td>
+            </tr>
+    
+            <tr>
+                <td><code>.val()</code></td>
+                <td><code>$(selector).val()</code> <br> <code>$(selector).val(value)</code></td>
+                <td>Gets or sets the value of form elements.</td>
+                <td>
+                    <code>value</code> (string or function) - The new input value.
+                </td>
+                <td>✅</td>
+                <td>Returns current value if no parameter is passed.</td>
+            </tr>
+    
+            <!-- Insertion Methods -->
+            <tr>
+                <td><code>.append()</code></td>
+                <td><code>$(selector).append(content)</code></td>
+                <td>Adds content to the end of selected elements.</td>
+                <td><code>content</code> (string, element, or jQuery object) - Content to append.</td>
+                <td>❌</td>
+                <td>-</td>
+            </tr>
+    
+            <tr>
+                <td><code>.prepend()</code></td>
+                <td><code>$(selector).prepend(content)</code></td>
+                <td>Adds content to the beginning of selected elements.</td>
+                <td><code>content</code> (string, element, or jQuery object) - Content to prepend.</td>
+                <td>❌</td>
+                <td>-</td>
+            </tr>
+    
+            <tr>
+                <td><code>.after()</code></td>
+                <td><code>$(selector).after(content)</code></td>
+                <td>Inserts content immediately after the selected elements.</td>
+                <td><code>content</code> - HTML, element, or jQuery object to insert.</td>
+                <td>❌</td>
+                <td>-</td>
+            </tr>
+    
+            <tr>
+                <td><code>.before()</code></td>
+                <td><code>$(selector).before(content)</code></td>
+                <td>Inserts content immediately before the selected elements.</td>
+                <td><code>content</code> - HTML, element, or jQuery object to insert.</td>
+                <td>❌</td>
+                <td>-</td>
+            </tr>
+    
+            <!-- Removal Methods -->
+            <tr>
+                <td><code>.remove()</code></td>
+                <td><code>$(selector).remove()</code></td>
+                <td>Removes selected elements and their data.</td>
+                <td>None</td>
+                <td>✅</td>
+                <td>-</td>
+            </tr>
+    
+            <tr>
+                <td><code>.empty()</code></td>
+                <td><code>$(selector).empty()</code></td>
+                <td>Removes all child elements from the selected elements.</td>
+                <td>None</td>
+                <td>✅</td>
+                <td>-</td>
+            </tr>
+    
+            <tr>
+                <td><code>.detach()</code></td>
+                <td><code>$(selector).detach()</code></td>
+                <td>Removes elements but keeps data and events.</td>
+                <td>None</td>
+                <td>✅</td>
+                <td>-</td>
+            </tr>
+    
+            <!-- Wrapping Methods -->
+            <tr>
+                <td><code>.wrap()</code></td>
+                <td><code>$(selector).wrap(wrapper)</code></td>
+                <td>Wraps selected elements inside the given wrapper.</td>
+                <td><code>wrapper</code> (string or element) - Wrapper element.</td>
+                <td>❌</td>
+                <td>-</td>
+            </tr>
+    
+            <tr>
+                <td><code>.wrapAll()</code></td>
+                <td><code>$(selector).wrapAll(wrapper)</code></td>
+                <td>Wraps all selected elements inside a single wrapper.</td>
+                <td><code>wrapper</code> (string or element) - Wrapper element.</td>
+                <td>❌</td>
+                <td>-</td>
+            </tr>
+    
+            <tr>
+                <td><code>.wrapInner()</code></td>
+                <td><code>$(selector).wrapInner(wrapper)</code></td>
+                <td>Wraps the inner content of selected elements.</td>
+                <td><code>wrapper</code> (string or element) - Wrapper element.</td>
+                <td>❌</td>
+                <td>-</td>
+            </tr>
+    
+            <tr>
+                <td><code>.unwrap()</code></td>
+                <td><code>$(selector).unwrap()</code></td>
+                <td>Removes the parent of selected elements.</td>
+                <td>None</td>
+                <td>✅</td>
+                <td>-</td>
+            </tr>
+    
+            <!-- Attribute Methods -->
+            <tr>
+                <td><code>.attr()</code></td>
+                <td><code>$(selector).attr(name, value)</code></td>
+                <td>Gets or sets attributes of elements.</td>
+                <td>
+                    <code>name</code> - Attribute name. <br>
+                    <code>value</code> - Attribute value.
+                </td>
+                <td>✅</td>
+                <td>Returns current value if no parameter is passed.</td>
+            </tr>
+    
+            <tr>
+                <td><code>.removeAttr()</code></td>
+                <td><code>$(selector).removeAttr(name)</code></td>
+                <td>Removes specified attributes.</td>
+                <td><code>name</code> - Attribute name to remove.</td>
+                <td>❌</td>
+                <td>-</td>
+            </tr>
+    
+            <tr>
+                <td><code>.prop()</code></td>
+                <td><code>$(selector).prop(name, value)</code></td>
+                <td>Gets or sets properties of elements.</td>
+                <td>
+                    <code>name</code> - Property name. <br>
+                    <code>value</code> - New property value.
+                </td>
+                <td>✅</td>
+                <td>Returns current value if no parameter is passed.</td>
+            </tr>
+    
+            <tr>
+                <td><code>.removeProp()</code></td>
+                <td><code>$(selector).removeProp(name)</code></td>
+                <td>Removes specified properties.</td>
+                <td><code>name</code> - Property name to remove.</td>
+                <td>❌</td>
+                <td>-</td>
+            </tr>
+    
+        </tbody>
     </table>
+    
+    <h2>jQuery DOM Manipulation Demo</h2>
 
-    <button id="btn-text">Change Text</button>
-    <button id="btn-html">Change HTML</button>
-    <button id="btn-val">Change Input Value</button>
-    <button id="btn-append">Append</button>
-    <button id="btn-prepend">Prepend</button>
-    <button id="btn-after">Insert After</button>
-    <button id="btn-before">Insert Before</button>
-    <button id="btn-appendTo">Append To</button>
-    <button id="btn-prependTo">Prepend To</button>
-    <button id="btn-remove">Remove</button>
-    <button id="btn-empty">Empty</button>
-    <button id="btn-detach">Detach</button>
-    <button id="btn-wrap">Wrap</button>
-    <button id="btn-wrapAll">Wrap All</button>
-    <button id="btn-unwrap">Unwrap</button>
-    <button id="btn-attr">Set Attribute</button>
-    <button id="btn-removeAttr">Remove Attribute</button>
-
-    <div id="container" class="box">
-        <p id="content">This is a paragraph.</p>
-        <p class="text">Another paragraph.</p>
-        <input type="text" id="inputField" value="Hello">
+    <div class="container" id="original-container">
+        <h3>Target Elements</h3>
+        <div id="target1" class="target">Target 1</div>
+        <div id="target2" class="target">Target 2</div>
+        <input type="text" id="inputBox" class="target" value="Input Field">
     </div>
 
-    <div id="detachable" class="box">Detachable Element</div>
+    <div class="buttons">
+        <h3>Text & HTML Manipulation</h3>
+        <button id="btn-text">Set Text (Target 1)</button>
+        <button id="btn-html">Set HTML (Target 1)</button>
+        <button id="btn-val">Set Value (Input Box)</button>
+    </div>
 
-    <script src="dom.js"></script>
+    <div class="buttons">
+        <h3>Insertion Methods</h3>
+        <button id="btn-append">Append (Inside Target 1)</button>
+        <button id="btn-prepend">Prepend (Inside Target 1)</button>
+        <button id="btn-after">Insert After (Target 1)</button>
+        <button id="btn-before">Insert Before (Target 1)</button>
+        <button id="btn-appendTo">Append To (Target 2 → Target 1)</button>
+        <button id="btn-prependTo">Prepend To (Target 2 → Target 1)</button>
+    </div>
+
+    <div class="buttons">
+        <h3>Removal & Detach Methods</h3>
+        <button id="btn-remove">Remove (Target 2)</button>
+        <button id="btn-empty">Empty (Target 1)</button>
+        <button id="btn-detach">Detach (Target 1)</button>
+        <button id="btn-reattach">Reattach (Target 1)</button>
+    </div>
+
+    <div class="buttons">
+        <h3>Wrapping Methods</h3>
+        <button id="btn-wrap">Wrap Target 1 (with a box)</button>
+        <button id="btn-wrapAll">Wrap All Targets (inside one box)</button>
+        <button id="btn-unwrap">Unwrap (Remove wrapping)</button>
+    </div>
+
+    <div class="buttons">
+        <h3>Attribute Methods</h3>
+        <button id="btn-attr">Set Attribute (Target 1)</button>
+        <button id="btn-removeAttr">Remove Attribute (Target 1)</button>
+    </div>
+
+    <div class="buttons">
+        <h3>Reset</h3>
+        <button id="btn-reset">Reset to Original State</button>
+    </div>
+
+    <h3>Action Output</h3>
+    <div id="output-box">Actions performed will be shown here.</div>
+
+    <script>
+        $(document).ready(function () {
+            let originalHTML = $("#original-container").html(); // Save the original state
+            let detachedElement = null;
+
+            function updateOutput(text) {
+                $("#output-box").text(text);
+            }
+
+            $("#btn-text").click(function () {
+                $("#target1").text("New Text Content");
+                updateOutput("Text changed in Target 1.");
+            });
+
+            $("#btn-html").click(function () {
+                $("#target1").html("<strong>New <em>HTML</em> Content</strong>");
+                updateOutput("HTML changed in Target 1.");
+            });
+
+            $("#btn-val").click(function () {
+                $("#inputBox").val("changed Value");
+                updateOutput("Value changed in Input Box.");
+            });
+
+            $("#btn-append").click(function () {
+                $("#target1").append("<div class='highlight'>Appended Content</div>");
+                updateOutput("Content appended to Target 1.");
+            });
+
+            $("#btn-prepend").click(function () {
+                $("#target1").prepend("<div class='highlight'>Prepended Content</div>");
+                updateOutput("Content prepended to Target 1.");
+            });
+
+            $("#btn-after").click(function () {
+                $("#target1").after("<div class='highlight'>Inserted After</div>");
+                updateOutput("Content inserted after Target 1.");
+            });
+
+            $("#btn-before").click(function () {
+                $("#target1").before("<div class='highlight'>Inserted Before</div>");
+                updateOutput("Content inserted before Target 1.");
+            });
+
+            $("#btn-appendTo").click(function () {
+                $("#target2").appendTo("#target1");
+                updateOutput("Target 2 appended to Target 1.");
+            });
+
+            $("#btn-prependTo").click(function () {
+                $("#target2").prependTo("#target1");
+                updateOutput("Target 2 prepended to Target 1.");
+            });
+
+            $("#btn-remove").click(function () {
+                $("#target2").remove();
+                updateOutput("Target 2 removed.");
+            });
+
+            $("#btn-empty").click(function () {
+                $("#target1").empty();
+                updateOutput("Target 1 emptied.");
+            });
+
+            $("#btn-detach").click(function () {
+                detachedElement = $("#target1").detach();
+                updateOutput("Target 1 detached.");
+            });
+
+            $("#btn-reattach").click(function () {
+                if (detachedElement) {
+                    $("#original-container").append(detachedElement);
+                    detachedElement = null;
+                    updateOutput("Target 1 reattached.");
+                } else {
+                    updateOutput("No detached element to reattach.");
+                }
+            });
+
+            $("#btn-wrap").click(function () {
+                $("#target1").wrap("<div class='highlight'>Wrapped Box</div>");
+                updateOutput("Target 1 wrapped.");
+            });
+
+            $("#btn-wrapAll").click(function () {
+                $(".target").wrapAll("<div class='highlight'>All Wrapped Together</div>");
+                updateOutput("All targets wrapped together.");
+            });
+
+            $("#btn-unwrap").click(function () {
+                $("#target1").unwrap();
+                updateOutput("Target 1 unwrapped.");
+            });
+
+            $("#btn-attr").click(function () {
+                $("#target1").attr("data-info", "Added Attribute");
+                updateOutput("Attribute 'data-info' added to Target 1.");
+            });
+
+            $("#btn-removeAttr").click(function () {
+                $("#target1").removeAttr("data-info");
+                updateOutput("Attribute 'data-info' removed from Target 1.");
+            });
+
+            $("#btn-reset").click(function () {
+                $("#original-container").html(originalHTML);
+                updateOutput("State reset to original.");
+            });
+
+        });
+    </script>
 
 </body>
 </html>

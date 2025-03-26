@@ -3,215 +3,290 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>jQuery Event Methods (Updated)</title>
+    <title>jQuery Events Demo</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        .box {
-            width: 100px;
-            height: 100px;
-            background-color: lightblue;
-            margin: 10px;
-            display: inline-block;
+        h1,h2,h3{
             text-align: center;
-            line-height: 100px;
-            cursor: pointer;
         }
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        #box { width: 150px; height: 150px; background: lightblue; text-align: center; line-height: 150px; margin: 20px; cursor: pointer; }
+        #output { margin-top: 20px; padding: 10px; border: 1px solid black; min-height: 30px; }
     </style>
 </head>
 <body>
-
-    <h2>jQuery Event Methods (Updated)</h2>
-
-    <table>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="selectors.html">Selectors</a>
+        <a href="event.html">Events</a>
+        <a href="effects.html">Effects</a>
+        <a href="dom.html">DOM Manipulation</a>
+        <a href="domTraversal.html">DOM Traversal</a>
+        <a href="css.html">CSS Manipulation</a>
+        <a href="iternTransform.html">Iteration & Transformation</a>
+        <a href="chain.html">Chaining</a>
+        <a href="ajax.html">AJAX</a>
+        <a href="util.html">Utility Functions</a>
+    </nav>
+    <h2>jQuery Event Methods Table</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
         <tr>
-            <th>Event Method</th>
+            <th>Method</th>
+            <th>Syntax</th>
             <th>Description</th>
-            <th>Example</th>
+            <th>Parameters</th>
+            <th>Callback Parameters</th>
         </tr>
         <tr>
-            <td><code>submit()</code></td>
-            <td>Triggers when a form is submitted</td>
-            <td><form id="myForm"><input type="submit" value="Submit"></form></td>
+            <td>.on()</td>
+            <td>$(selector).on(event, childSelector?, data?, handler)</td>
+            <td>Attaches an event handler to elements.</td>
+            <td>
+                <b>event:</b> String (event type) <br>
+                <b>childSelector?:</b> String (optional) <br>
+                <b>data?:</b> Any (optional) <br>
+                <b>handler:</b> Function
+            </td>
+            <td>event object (<code>event</code>)</td>
         </tr>
         <tr>
-            <td><code>change()</code></td>
-            <td>Triggers when an input value changes</td>
-            <td><input type="text" id="textInput" placeholder="Type something..."></td>
+            <td>.off()</td>
+            <td>$(selector).off(event?, childSelector?, handler?)</td>
+            <td>Removes an event handler.</td>
+            <td>
+                <b>event?:</b> String (optional) <br>
+                <b>childSelector?:</b> String (optional) <br>
+                <b>handler?:</b> Function (optional)
+            </td>
+            <td>None</td>
         </tr>
         <tr>
-            <td><code>focus()</code></td>
-            <td>Triggers when an input gains focus</td>
-            <td><input type="text" id="focusInput" placeholder="Click here..."></td>
+            <td>.one()</td>
+            <td>$(selector).one(event, childSelector?, data?, handler)</td>
+            <td>Attaches an event that runs only once.</td>
+            <td>Same as <code>.on()</code></td>
+            <td>event object</td>
         </tr>
         <tr>
-            <td><code>blur()</code></td>
-            <td>Triggers when an input loses focus</td>
-            <td><input type="text" id="blurInput" placeholder="Click and leave..."></td>
+            <td>.bind()</td>
+            <td>$(selector).bind(event, data?, handler)</td>
+            <td>Attaches an event (deprecated in favor of <code>.on()</code>).</td>
+            <td>Same as <code>.on()</code></td>
+            <td>event object</td>
         </tr>
         <tr>
-            <td><code>keydown()</code></td>
-            <td>Triggers when a key is pressed(here console logged)</td>
-            <td><input type="text" id="keyDownInput" placeholder="Press a key..."></td>
+            <td>.unbind()</td>
+            <td>$(selector).unbind(event?, handler?)</td>
+            <td>Removes an event (deprecated in favor of <code>.off()</code>).</td>
+            <td>
+                <b>event?:</b> String (optional) <br>
+                <b>handler?:</b> Function (optional)
+            </td>
+            <td>None</td>
         </tr>
         <tr>
-            <td><code>keyup()</code></td>
-            <td>Triggers when a key is released(here console logged)</td>
-            <td><input type="text" id="keyUpInput" placeholder="Release a key..."></td>
+            <td>.delegate()</td>
+            <td>$(selector).delegate(childSelector, event, data?, handler)</td>
+            <td>Binds an event to dynamically created elements.</td>
+            <td>Same as <code>.on()</code></td>
+            <td>event object</td>
         </tr>
         <tr>
-            <td><code>click()</code></td>
-            <td>Triggers when an element is clicked</td>
-            <td><button id="btnClick">Click Me</button></td>
+            <td>.undelegate()</td>
+            <td>$(selector).undelegate(childSelector?, event?, handler?)</td>
+            <td>Removes a delegated event.</td>
+            <td>Same as <code>.off()</code></td>
+            <td>None</td>
         </tr>
         <tr>
-            <td><code>dblclick()</code></td>
-            <td>Triggers when an element is double-clicked</td>
-            <td><button id="btnDblClick">Double Click Me</button></td>
+            <td>.trigger()</td>
+            <td>$(selector).trigger(event, extraParameters?)</td>
+            <td>Fires an event manually.</td>
+            <td>
+                <b>event:</b> String or Event object <br>
+                <b>extraParameters?:</b> Array (optional)
+            </td>
+            <td>event object</td>
         </tr>
         <tr>
-            <td><code>contextmenu()</code></td>
-            <td>Triggers on right-click</td>
-            <td><button id="rightClick">Right Click</button></td>
+            <td>.triggerHandler()</td>
+            <td>$(selector).triggerHandler(event, extraParameters?)</td>
+            <td>Fires an event but does not bubble up.</td>
+            <td>Same as <code>.trigger()</code></td>
+            <td>event object</td>
         </tr>
         <tr>
-            <td><code>mouseenter()</code></td>
-            <td>Triggers when mouse enters an element</td>
-            <td><div class="box" id="mouseEnter">Hover Me</div></td>
-        </tr>
-        <tr>
-            <td><code>mouseleave()</code></td>
-            <td>Triggers when mouse leaves an element</td>
-            <td><div class="box" id="mouseLeave">Leave Me</div></td>
-        </tr>
-        <tr>
-            <td><code>hover(fn1, fn2)</code></td>
-            <td>Triggers on hover-in and hover-out</td>
-            <td><div class="box" id="hoverBox">Hover</div></td>
-        </tr>
-        <tr>
-            <td><code>resize()</code></td>
-            <td>Triggers when the window is resized</td>
-            <td>Resize the window!</td>
-        </tr>
-        <tr>
-            <td><code>scroll()</code></td>
-            <td>Triggers when the page is scrolled</td>
-            <td>Scroll down!(here console logged)</td>
-        </tr>
-        <tr>
-            <td><code>on(event, selector, function)</code></td>
-            <td>Binds events dynamically (For future elements too)</td>
-            <td><button id="dynamicButton">Click Me</button> (Dynamically added buttons)</td>
-        </tr>
-        <tr>
-            <td><code>off(event, selector, function)</code></td>
-            <td>Removes an event dynamically</td>
-            <td><button id="removeClick">Remove Click</button></td>
-        </tr>
-        <tr>
-            <td><code>one(event, function)</code></td>
-            <td>Triggers an event only once</td>
-            <td><button id="btnOne">Click Me Once</button></td>
+            <td>.hover()</td>
+            <td>$(selector).hover(handlerIn, handlerOut?)</td>
+            <td>Shorthand for mouseenter/mouseleave.</td>
+            <td>
+                <b>handlerIn:</b> Function <br>
+                <b>handlerOut?:</b> Function (optional)
+            </td>
+            <td>event object</td>
         </tr>
     </table>
 
+    <h2>jQuery Event Types Table that can be used with .on</h2>
+    <table border="1">
+        <tr>
+            <th>Category</th>
+            <th>Event Types</th>
+        </tr>
+        <tr>
+            <td><b>Mouse Events</b></td>
+            <td>click, dblclick, mousedown, mouseup, mousemove, mouseover, mouseout, mouseenter, mouseleave</td>
+        </tr>
+        <tr>
+            <td><b>Keyboard Events</b></td>
+            <td>keydown, keypress, keyup</td>
+        </tr>
+        <tr>
+            <td><b>Form Events</b></td>
+            <td>submit, change, focus, blur, input, select, reset</td>
+        </tr>
+        <tr>
+            <td><b>Window Events</b></td>
+            <td>load, unload, resize, scroll, error</td>
+        </tr>
+        <tr>
+            <td><b>Clipboard Events</b></td>
+            <td>copy, cut, paste</td>
+        </tr>
+        <tr>
+            <td><b>Document Events</b></td>
+            <td>ready</td>
+        </tr>
+        <tr>
+            <td><b>Custom Events</b></td>
+            <td>Any event name you define with <code>.trigger()</code></td>
+        </tr>
+    </table>
+
+
+    <h2>jQuery Events Demonstration</h2>
+    
+    <button id="click-btn">Click Me</button>
+    <button id="dblclick-btn">Double Click Me</button>
+    <button id="one-btn">Click Me Once</button>
+    <button id="off-btn">Remove Click Event</button>
+
+    <div id="box">Hover Me</div>
+
+    <form id="sample-form">
+        <label>Name: <input type="text" id="name-field"></label><br><br>
+        <label>Choose an option:
+            <select id="dropdown">
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+            </select>
+        </label><br><br>
+        <button type="submit">Submit Form</button>
+    </form>
+
+    <div id="output">Event Output Here</div>
+
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
+            let output = $("#output");
 
-            // Basic event handlers
-            $("#myForm").on("submit", function(event) {
-                alert("Form submitted!");
-                event.preventDefault();
+            // ✅ Click Event
+            $("#click-btn").click(function () {
+                output.text("Button clicked!");
             });
 
-            $("#textInput").on("change", function() {
-                alert("Value changed!");
+            // ✅ Double Click Event
+            $("#dblclick-btn").dblclick(function () {
+                output.text("Button double-clicked!");
             });
 
-            $("#focusInput").on("focus", function() {
-                alert("Input focused!");
+            // ✅ One-time Click Event
+            $("#one-btn").one("click", function () {
+                output.text("This button works only once!");
             });
 
-            $("#blurInput").on("blur", function() {
-                alert("Input lost focus!");
+            // ✅ Remove Click Event from a Button
+            $("#off-btn").click(function () {
+                $("#click-btn").off("click");
+                output.text("Click event removed from 'Click Me' button.");
             });
 
-            $("#keyDownInput").on("keydown", function(event) {
-                console.log("Key pressed:", event.key);
+            // ✅ Mouse Enter & Leave
+            $("#box").mouseenter(function () {
+                $(this).css("background", "lightgreen").text("Mouse In");
+            }).mouseleave(function () {
+                $(this).css("background", "lightblue").text("Mouse Out");
             });
 
-            $("#keyUpInput").on("keyup", function(event) {
-                console.log("Key released:", event.key);
+            // ✅ Key Events
+            $("#name-field").keydown(function () {
+                output.text("Key is being pressed...");
+            }).keyup(function () {
+                output.text("Key released.");
+            }).keypress(function () {
+                output.text("Key pressed.");
             });
 
-            $("#btnClick").on("click", function() {
-                alert("Button clicked!");
+            // ✅ Form Events
+            $("#name-field").focus(function () {
+                output.text("Input field focused.");
+            }).blur(function () {
+                output.text("Input field lost focus.");
             });
 
-            $("#btnDblClick").on("dblclick", function() {
-                alert("Button double clicked!");
+            $("#dropdown").change(function () {
+                output.text("Dropdown changed to: " + $(this).val());
             });
 
-            $("#rightClick").on("contextmenu", function(event) {
-                event.preventDefault();
-                alert("Right-click detected!");
+            $("#sample-form").submit(function (e) {
+                e.preventDefault();
+                output.text("Form submitted!");
             });
 
-            $("#mouseEnter").on("mouseenter", function() {
-                $(this).css("background-color", "yellow");
+            // ✅ Window Events
+            $(window).resize(function () {
+                output.text("Window resized.");
             });
 
-            $("#mouseLeave").on("mouseleave", function() {
-                $(this).css("background-color", "red");
+            $(window).scroll(function () {
+                output.text("Window scrolled.");
             });
 
-            $("#hoverBox").hover(
-                function() { $(this).css("background-color", "green"); },
-                function() { $(this).css("background-color", "lightblue"); }
-            );
-
-            $(window).on("resize", function() {
-                console.log("Window resized!");
+            $(window).on("load", function () {
+                output.text("Page loaded.");
             });
 
-            $(window).on("scroll", function() {
-                console.log("Page scrolled!");
+            $(window).on("unload", function () {
+                output.text("Page is being unloaded.");
             });
 
-            // Event delegation using on()
-            $(document).on("click", ".dynamic-btn", function() {
-                alert("Dynamically added button clicked!");
+            // ✅ Event Delegation
+            $("#output").on("click", "p", function () {
+                output.text("Delegated click event triggered on a paragraph.");
             });
 
-            // Adding dynamically created buttons
-            $("#dynamicButton").on("click", function() {
-                $("body").append('<button class="dynamic-btn">New Button</button>');
-            });
+            // ✅ Delegate Event Example
+            $("#output").append("<p>Click me (delegated)</p>");
 
-            // Remove event dynamically
-            $("#removeClick").on("click", function() {
-                $("#btnClick").off("click");
-                alert("Click event removed!");
+            // ✅ Unbind Delegated Event
+            $("#off-btn").click(function () {
+                $("#output").off("click", "p");
+                output.text("Delegated event removed.");
             });
-
-            // One-time event trigger
-            $("#btnOne").one("click", function() {
-                alert("This button can only be clicked once!");
-            });
-
         });
     </script>
 

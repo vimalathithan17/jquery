@@ -6,14 +6,46 @@
     <title>jQuery Selectors Demo</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        h1,h2,h3{
+            text-align: center;
+        }
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
         .highlight { background-color: yellow; }
         .border { border: 2px solid red; }
+        button { margin-bottom: 10px; padding: 8px; }
+        pre { background: #f4f4f4; padding: 10px; border: 1px solid #ddd; white-space: pre-wrap; }
     </style>
 </head>
 <body>
-
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="selectors.html">Selectors</a>
+        <a href="event.html">Events</a>
+        <a href="effects.html">Effects</a>
+        <a href="dom.html">DOM Manipulation</a>
+        <a href="domTraversal.html">DOM Traversal</a>
+        <a href="css.html">CSS Manipulation</a>
+        <a href="iternTransform.html">Iteration & Transformation</a>
+        <a href="chain.html">Chaining</a>
+        <a href="ajax.html">AJAX</a>
+        <a href="util.html">Utility Functions</a>
+    </nav>
     <h2>jQuery Selectors Example</h2>
-    <table>
+    <table border="1" cellpadding="8" cellspacing="0">
         <tr>
             <th>Selector</th>
             <th>Usage</th>
@@ -138,7 +170,98 @@
         <li>Item 3</li>
     </ul>
 
-    <script src="selectors.js"></script>
+    <h3>Output:</h3>
+    <pre id="output">Click the button to see applied selectors...</pre>
+
+    <script>
+        $(document).ready(function() {
+            function log(action, code) {
+                $("#output").append(`\n${action}\nExecuted Code: ${code}\n`);
+            }
+
+            $("#btn").click(function() {
+                $("#output").text("Applying Selectors...\n");
+
+                // **1. Basic Selectors**
+                $("#para1").addClass("highlight");
+                log("Highlighted Paragraph 1.", '$("#para1").addClass("highlight");');
+
+                $(".para").addClass("border");
+                log("Added red border to elements with class 'para'.", '$(".para").addClass("border");');
+
+                $("p").css("color", "blue");
+                log("Changed all paragraph text to blue.", '$("p").css("color", "blue");');
+
+                $("*").css("font-family", "Arial");
+                log("Set font to Arial for all elements.", '$("*").css("font-family", "Arial");');
+
+                // **2. Hierarchy Selectors**
+                $("#container p").css("font-weight", "bold");
+                log("Made all paragraphs inside #container bold.", '$("#container p").css("font-weight", "bold");');
+
+                $("#container > p").css("text-decoration", "underline");
+                log("Underlined direct child paragraphs of #container.", '$("#container > p").css("text-decoration", "underline");');
+
+                $("p + span").css("color", "green");
+                log("Made span after a paragraph green.", '$("p + span").css("color", "green");');
+
+                $(".para ~ p").css("background-color", "lightgray");
+                log("Set background light gray for paragraphs that are siblings of .para.", '$(".para ~ p").css("background-color", "lightgray");');
+
+                // **3. Attribute Selectors**
+                $("input[name]").css("border", "2px solid blue");
+                log("Added blue border to all inputs with a 'name' attribute.", '$("input[name]").css("border", "2px solid blue");');
+
+                $("input[name='username']").css("background-color", "lightyellow");
+                log("Highlighted username input field.", '$("input[name=\'username\']").css("background-color", "lightyellow");');
+
+                $("input[class^='check']").css("border", "2px dashed orange");
+                log("Dashed orange border for checkboxes.", '$("input[class^=\'check\']").css("border", "2px dashed orange");');
+
+                $("input[class*='special']").css("border", "2px dotted purple");
+                log("Purple dotted border for inputs containing 'special' in class.", '$("input[class*=\'special\']").css("border", "2px dotted purple");');
+
+                // **4. Form Selectors**
+                $(":text").css("border", "2px solid green");
+                log("Green border for text inputs.", '$(":text").css("border", "2px solid green");');
+
+                $(":checkbox").css("width", "20px");
+                log("Increased checkbox size.", '$(":checkbox").css("width", "20px");');
+
+                $(":radio").css("height", "20px");
+                log("Increased radio button size.", '$(":radio").css("height", "20px");');
+
+                $(":checked").parent().css("background-color", "lightpink");
+                log("Highlighted parent of checked elements.", '$(":checked").parent().css("background-color", "lightpink");');
+
+                $(":input").css("padding", "5px");
+                log("Added padding to all input elements.", '$(":input").css("padding", "5px");');
+
+                // **5. Filtering Selectors**
+                $("li:first").css("color", "red");
+                log("First list item turned red.", '$("li:first").css("color", "red");');
+
+                $("li:last").css("color", "blue");
+                log("Last list item turned blue.", '$("li:last").css("color", "blue");');
+
+                $("li:even").css("background", "#ddd");
+                log("Even indexed list items have gray background.", '$("li:even").css("background", "#ddd");');
+
+                $("li:odd").css("background", "#bbb");
+                log("Odd indexed list items have darker gray background.", '$("li:odd").css("background", "#bbb");');
+
+                $("p:contains('3')").css("border", "3px solid green");
+                log("Added green border to paragraph containing '3'.", '$("p:contains(\'3\')").css("border", "3px solid green");');
+
+                // **6. Visibility Selectors**
+                $(":visible").css("border", "1px solid black");
+                log("Added black border to visible elements.", '$(":visible").css("border", "1px solid black");');
+
+                $(":hidden").show();
+                log("Made hidden elements visible.", '$(":hidden").show();');
+            });
+        });
+    </script>
 
 </body>
 </html>

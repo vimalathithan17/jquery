@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery DOM Traversal Methods</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            padding: 15px;
+            border: 2px solid black;
+            display: inline-block;
+            margin: 20px;
+        }
+        .box {
+            padding: 10px;
+            border: 2px solid blue;
+            margin: 5px;
+            text-align: center;
+        }
+        .output-box {
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px solid green;
+            min-height: 30px;
+            background-color: #f4fff4;
+            font-weight: bold;
+        }
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            display: block;
+        }
+        .code {
+            font-size: 12px;
+            color: #666;
+        }
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        h1,h2,h3{
+            text-align: center;
+        }
+    </style>
+</head>
+<body id="body">
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="selectors.html">Selectors</a>
+        <a href="event.html">Events</a>
+        <a href="effects.html">Effects</a>
+        <a href="dom.html">DOM Manipulation</a>
+        <a href="domTraversal.html">DOM Traversal</a>
+        <a href="css.html">CSS Manipulation</a>
+        <a href="iternTransform.html">Iteration & Transformation</a>
+        <a href="chain.html">Chaining</a>
+        <a href="ajax.html">AJAX</a>
+        <a href="util.html">Utility Functions</a>
+    </nav>
+    <h2 id="title">jQuery DOM Traversal Methods</h2>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Syntax</th>
+                <th>Description</th>
+                <th>Parameters</th>
+                <th>Return Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>.parent()</code></td>
+                <td><code>$(selector).parent([filter])</code></td>
+                <td>Gets the direct parent of each element in the set.</td>
+                <td>
+                    <b>filter</b> (optional) - A selector to filter the parent.
+                </td>
+                <td>jQuery object (parent elements)</td>
+            </tr>
+            <tr>
+                <td><code>.parents()</code></td>
+                <td><code>$(selector).parents([filter])</code></td>
+                <td>Finds all ancestors (parents, grandparents, etc.).</td>
+                <td>
+                    <b>filter</b> (optional) - A selector to filter ancestors.
+                </td>
+                <td>jQuery object (all ancestors)</td>
+            </tr>
+            <tr>
+                <td><code>.parentsUntil()</code></td>
+                <td><code>$(selector).parentsUntil([stop], [filter])</code></td>
+                <td>Selects all parent elements up to (but not including) the specified stop element.</td>
+                <td>
+                    <b>stop</b> (optional) - Selector to stop at.<br>
+                    <b>filter</b> (optional) - Filter matching parents.
+                </td>
+                <td>jQuery object (ancestors up to stop element)</td>
+            </tr>
+            <tr>
+                <td><code>.closest()</code></td>
+                <td><code>$(selector).closest(selector)</code></td>
+                <td>Finds the closest matching ancestor (including itself).</td>
+                <td>
+                    <b>selector</b> - A selector to match.
+                </td>
+                <td>jQuery object (closest matching element)</td>
+            </tr>
+            <tr>
+                <td><code>.children()</code></td>
+                <td><code>$(selector).children([filter])</code></td>
+                <td>Finds direct child elements.</td>
+                <td>
+                    <b>filter</b> (optional) - A selector to filter children.
+                </td>
+                <td>jQuery object (direct children)</td>
+            </tr>
+            <tr>
+                <td><code>.find()</code></td>
+                <td><code>$(selector).find(selector)</code></td>
+                <td>Finds all descendants matching a selector.</td>
+                <td>
+                    <b>selector</b> - A selector string.
+                </td>
+                <td>jQuery object (matching descendants)</td>
+            </tr>
+            <tr>
+                <td><code>.siblings()</code></td>
+                <td><code>$(selector).siblings([filter])</code></td>
+                <td>Finds all siblings of an element.</td>
+                <td>
+                    <b>filter</b> (optional) - A selector to filter siblings.
+                </td>
+                <td>jQuery object (siblings)</td>
+            </tr>
+            <tr>
+                <td><code>.next()</code></td>
+                <td><code>$(selector).next([filter])</code></td>
+                <td>Finds the immediately following sibling.</td>
+                <td>
+                    <b>filter</b> (optional) - A selector to filter the next sibling.
+                </td>
+                <td>jQuery object (next sibling)</td>
+            </tr>
+            <tr>
+                <td><code>.prev()</code></td>
+                <td><code>$(selector).prev([filter])</code></td>
+                <td>Finds the immediately preceding sibling.</td>
+                <td>
+                    <b>filter</b> (optional) - A selector to filter the previous sibling.
+                </td>
+                <td>jQuery object (previous sibling)</td>
+            </tr>
+            <tr>
+                <td><code>.nextAll()</code></td>
+                <td><code>$(selector).nextAll([filter])</code></td>
+                <td>Finds all following siblings.</td>
+                <td>
+                    <b>filter</b> (optional) - A selector to filter the siblings.
+                </td>
+                <td>jQuery object (all next siblings)</td>
+            </tr>
+            <tr>
+                <td><code>.prevAll()</code></td>
+                <td><code>$(selector).prevAll([filter])</code></td>
+                <td>Finds all preceding siblings.</td>
+                <td>
+                    <b>filter</b> (optional) - A selector to filter the siblings.
+                </td>
+                <td>jQuery object (all previous siblings)</td>
+            </tr>
+            <tr>
+                <td><code>.nextUntil()</code></td>
+                <td><code>$(selector).nextUntil([stop], [filter])</code></td>
+                <td>Finds all following siblings up to the stop element.</td>
+                <td>
+                    <b>stop</b> (optional) - Selector to stop at.<br>
+                    <b>filter</b> (optional) - Filter matching elements.
+                </td>
+                <td>jQuery object (all next siblings until stop element)</td>
+            </tr>
+            <tr>
+                <td><code>.prevUntil()</code></td>
+                <td><code>$(selector).prevUntil([stop], [filter])</code></td>
+                <td>Finds all preceding siblings up to the stop element.</td>
+                <td>
+                    <b>stop</b> (optional) - Selector to stop at.<br>
+                    <b>filter</b> (optional) - Filter matching elements.
+                </td>
+                <td>jQuery object (all previous siblings until stop element)</td>
+            </tr>
+            <tr>
+                <td><code>.first()</code></td>
+                <td><code>$(selector).first()</code></td>
+                <td>Finds the first element in a jQuery object.</td>
+                <td>None</td>
+                <td>jQuery object (first matched element)</td>
+            </tr>
+            <tr>
+                <td><code>.last()</code></td>
+                <td><code>$(selector).last()</code></td>
+                <td>Finds the last element in a jQuery object.</td>
+                <td>None</td>
+                <td>jQuery object (last matched element)</td>
+            </tr>
+            <tr>
+                <td><code>.eq()</code></td>
+                <td><code>$(selector).eq(index)</code></td>
+                <td>Selects an element at a specific index.</td>
+                <td>
+                    <b>index</b> - Zero-based index of element to select.
+                </td>
+                <td>jQuery object (element at the index)</td>
+            </tr>
+            <tr>
+                <td><code>.filter()</code></td>
+                <td><code>$(selector).filter(selector)</code></td>
+                <td>Filters the matched elements based on a selector.</td>
+                <td>
+                    <b>selector</b> - A selector or function(params:index,element)to filter elements.
+                </td>
+                <td>jQuery object (filtered elements)</td>
+            </tr>
+            <tr>
+                <td><code>.not()</code></td>
+                <td><code>$(selector).not(selector)</code></td>
+                <td>Removes elements that match the selector.</td>
+                <td>
+                    <b>selector</b> - A selector or function to exclude elements.
+                </td>
+                <td>jQuery object (non-matching elements)</td>
+            </tr>
+            <tr>
+                <td><code>.has()</code></td>
+                <td><code>$(selector).has(selector)</code></td>
+                <td>Finds elements that contain the specified child elements.</td>
+                <td>
+                    <b>selector</b> - A selector to find contained elements.
+                </td>
+                <td>jQuery object (elements that contain matches)</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div id="container-wrapper">
+        <div class="container" id="main-container">
+            <div id="parent-box" class="box">
+                Parent Box
+                <div id="child1" class="box">Child 1</div>
+                <div id="child2" class="box">
+                    Child 2
+                    <div id="grandchild1" class="box">Grandchild 1</div>
+                    <div id="grandchild2" class="box">Grandchild 2</div>
+                </div>
+                <div id="child3" class="box">Child 3</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="output-box">Selected elements will be shown here.</div>
+
+    <div id="button-sections">
+        <h3>Parent Traversal</h3>
+        <button id="btn-parent">Find Parent (Child 1)<br><span class="code">$("#child1").parent()</span></button>
+        <button id="btn-parents">Find All Parents (Grandchild 1)<br><span class="code">$("#grandchild1").parents()</span></button>
+        <button id="btn-parentsUntil">Find Parents Until (Grandchild 1 → #main-container)<br><span class="code">$("#grandchild1").parentsUntil("#main-container")</span></button>
+        <button id="btn-closest">Find Closest Parent Box (Grandchild 1)<br><span class="code">$("#grandchild1").closest("#parent-box")</span></button>
+
+        <h3>Children Traversal</h3>
+        <button id="btn-children">Find Direct Children (Parent Box)<br><span class="code">$("#parent-box").children()</span></button>
+        <button id="btn-find">Find All Descendants (Child 2)<br><span class="code">$("#child2").find(".box")</span></button>
+
+        <h3>Sibling Traversal</h3>
+        <button id="btn-siblings">Find Siblings (Child 1)<br><span class="code">$("#child1").siblings()</span></button>
+        <button id="btn-next">Find Next Sibling (Child 1)<br><span class="code">$("#child1").next()</span></button>
+        <button id="btn-prev">Find Previous Sibling (Child 2)<br><span class="code">$("#child2").prev()</span></button>
+        <button id="btn-nextAll">Find All Next Siblings (Child 1)<br><span class="code">$("#child1").nextAll()</span></button>
+        <button id="btn-prevAll">Find All Previous Siblings (Child 3)<br><span class="code">$("#child3").prevAll()</span></button>
+        <button id="btn-nextUntil">Find Next Until (Child 1 → Child 3)<br><span class="code">$("#child1").nextUntil("#child3")</span></button>
+        <button id="btn-prevUntil">Find Previous Until (Child 3 → Child 1)<br><span class="code">$("#child3").prevUntil("#child1")</span></button>
+
+        <h3>Filtering Elements</h3>
+        <button id="btn-first">Select First Child<br><span class="code">$(".box").first()</span></button>
+        <button id="btn-last">Select Last Child<br><span class="code">$(".box").last()</span></button>
+        <button id="btn-eq">Select Second Child (eq(1))<br><span class="code">$(".box").eq(1)</span></button>
+        <button id="btn-filter">Filter Even-Indexed Boxes<br><span class="code">$(".box").filter(":even")</span></button>
+        <button id="btn-not">Exclude First Child<br><span class="code">$(".box").not("#child1")</span></button>
+        <button id="btn-has">Find Elements Containing Child Boxes<br><span class="code">$(".box").has(".box")</span></button>
+
+        <h3>Reset</h3>
+        <button id="btn-reset">Reset Selection</button>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            function updateOutput(text) {
+                $("#output-box").text(text);
+            }
+
+            function listSelectedElements(selector) {
+                let ids = selector.map(function() {
+                    return this.id || this.tagName.toLowerCase();
+                }).get().join(", ");
+                updateOutput("Selected elements: " + (ids || "None"));
+            }
+
+            $("#btn-parent").click(() => listSelectedElements($("#child1").parent()));
+            $("#btn-parents").click(() => listSelectedElements($("#grandchild1").parents()));
+            $("#btn-parentsUntil").click(() => listSelectedElements($("#grandchild1").parentsUntil("#main-container")));
+            $("#btn-closest").click(() => listSelectedElements($("#grandchild1").closest("#parent-box")));
+
+            $("#btn-children").click(() => listSelectedElements($("#parent-box").children()));
+            $("#btn-find").click(() => listSelectedElements($("#child2").find(".box")));
+
+            $("#btn-siblings").click(() => listSelectedElements($("#child1").siblings()));
+            $("#btn-next").click(() => listSelectedElements($("#child1").next()));
+            $("#btn-prev").click(() => listSelectedElements($("#child2").prev()));
+            $("#btn-nextAll").click(() => listSelectedElements($("#child1").nextAll()));
+            $("#btn-prevAll").click(() => listSelectedElements($("#child3").prevAll()));
+            $("#btn-nextUntil").click(() => listSelectedElements($("#child1").nextUntil("#child3")));
+            $("#btn-prevUntil").click(() => listSelectedElements($("#child3").prevUntil("#child1")));
+
+            $("#btn-first").click(() => listSelectedElements($(".box").first()));
+            $("#btn-last").click(() => listSelectedElements($(".box").last()));
+            $("#btn-eq").click(() => listSelectedElements($(".box").eq(1)));
+            $("#btn-filter").click(() => listSelectedElements($(".box").filter(":even")));
+            $("#btn-not").click(() => listSelectedElements($(".box").not("#child1")));
+            $("#btn-has").click(() => listSelectedElements($(".box").has(".box")));
+
+            $("#btn-reset").click(() => updateOutput("Selection reset."));
+        });
+    </script>
+
+</body>
+</html>

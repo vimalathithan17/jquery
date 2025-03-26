@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .highlight {
+            color: #d35400;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Homw</a>
+        <a href="selectors.html">Selectors</a>
+        <a href="event.html">Events</a>
+        <a href="effects.html">Effects</a>
+        <a href="dom.html">DOM Manipulation</a>
+        <a href="domTraversal.html">DOM Traversal</a>
+        <a href="css.html">CSS Manipulation</a>
+        <a href="iternTransform.html">Iteration & Transformation</a>
+        <a href="chain.html">Chaining</a>
+        <a href="ajax.html">AJAX</a>
+        <a href="util.html">Utility Functions</a>
+    </nav>
+
+    <div class="container">
+        <h1>What is jQuery?</h1>
+        <p>
+            jQuery is a fast, lightweight, and feature-rich JavaScript library designed to simplify HTML DOM tree traversal and manipulation, event handling, animation, and AJAX interactions. 
+            It provides a simple API that works across a multitude of browsers, making JavaScript development easier.
+        </p>
+
+        <h2>What is a jQuery Object (jQuery Collection)?</h2>
+        <p>
+            A jQuery object is a special wrapper around a set of DOM elements. Unlike a regular JavaScript DOM element or an <code>HTMLCollection</code>, 
+            jQuery objects allow us to perform powerful operations on multiple elements at once using jQuery methods.
+        </p>
+
+        <h3>Differences Between jQuery Object and Normal HTML Collection</h3>
+        <ul>
+            <li><span class="highlight">jQuery Object:</span> Comes with jQuery methods and allows chaining.</li>
+            <li><span class="highlight">HTML Collection:</span> A basic JavaScript object that requires looping for multiple elements.</li>
+            <li><span class="highlight">Example:</span></li>
+        </ul>
+        <pre>
+// jQuery Object
+$(".box").css("color", "red").hide(); // Chainable
+
+// HTML Collection
+let elements = document.getElementsByClassName("box");
+for (let i = 0; i < elements.length; i++) {
+    elements[i].style.color = "red";
+}
+        </pre>
+
+        <h2>Chaining in jQuery</h2>
+        <p>
+            One of the key advantages of jQuery is method chaining. Since most jQuery methods return a jQuery collection, 
+            we can call multiple methods in a single line.
+        </p>
+        <pre>
+// Without Chaining
+$(".box").fadeOut();
+$(".box").css("background", "blue");
+$(".box").slideDown();
+
+// With Chaining
+$(".box").fadeOut().css("background", "blue").slideDown();
+        </pre>
+
+        <h2>jQuery Functions and Their Return Types</h2>
+        <p>
+            Most jQuery functions return a jQuery collection, meaning they can be chained together. However, some functions return other data types.
+        </p>
+        <ul>
+            <li><span class="highlight">Returns jQuery Collection:</span> <code>.css()</code>, <code>.fadeIn()</code>, <code>.addClass()</code></li>
+            <li><span class="highlight">Returns Data:</span> <code>.width()</code>, <code>.height()</code>, <code>.attr()</code></li>
+        </ul>
+        <pre>
+// Example: Returns jQuery Collection
+$(".box").css("background", "yellow").slideUp();
+
+// Example: Returns Data
+let width = $(".box").width(); // Gets the width value
+        </pre>
+
+        <h2>jQuery Utility Functions</h2>
+        <p>
+            jQuery provides utility functions that operate independently of the DOM. These are used for tasks like array manipulation, type checking, and AJAX handling.
+        </p>
+        <ul>
+            <li><code>$.each()</code> - Iterates over objects and arrays.</li>
+            <li><code>$.grep()</code> - Filters an array based on a condition.</li>
+            <li><code>$.extend()</code> - Merges objects.</li>
+            <li><code>$.trim()</code> - Removes whitespace from strings.</li>
+        </ul>
+        <pre>
+// Example: Using $.each()
+$.each([1, 2, 3], function(index, value) {
+    console.log("Index:", index, "Value:", value);
+});
+        </pre>
+
+        <h2>The jQuery Object Itself</h2>
+        <p>
+            The jQuery object is the core function that provides all jQuery functionalities. It can be accessed as <code>jQuery</code> or <code>$</code>.
+        </p>
+        <pre>
+console.log(jQuery); // Outputs jQuery function
+console.log($);      // Also outputs jQuery function
+        </pre>
+
+        <h2>Conclusion</h2>
+        <p>
+            jQuery simplifies JavaScript programming by providing an elegant way to manipulate the DOM, handle events, add effects, make AJAX calls, and more. 
+            Understanding how jQuery objects work, chaining, and the utility functions will allow you to write cleaner and more efficient code.
+        </p>
+    </div>
+
+</body>
+</html>

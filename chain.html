@@ -6,6 +6,25 @@
     <title>jQuery Method Chaining Example</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
         #box {
             width: 100px;
             height: 100px;
@@ -13,18 +32,84 @@
             text-align: center;
             line-height: 100px;
             position: relative;
+            margin: 20px auto;
+        }
+        #output {
+            width: 80%;
+            margin: 20px auto;
+            padding: 10px;
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            text-align: left;
+            white-space: pre-line;
+            font-family: monospace;
+        }
+        h1,h2,h3{
+            text-align: center;
         }
     </style>
 </head>
 <body>
-
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="selectors.html">Selectors</a>
+        <a href="event.html">Events</a>
+        <a href="effects.html">Effects</a>
+        <a href="dom.html">DOM Manipulation</a>
+        <a href="domTraversal.html">DOM Traversal</a>
+        <a href="css.html">CSS Manipulation</a>
+        <a href="iternTransform.html">Iteration & Transformation</a>
+        <a href="chain.html">Chaining</a>
+        <a href="ajax.html">AJAX</a>
+        <a href="util.html">Utility Functions</a>
+    </nav>
     <h2>jQuery Method Chaining Example</h2>
     <button id="btn-chain">Apply Chaining</button>
     <button id="btn-reset">Reset</button>
 
     <div id="box">Box</div>
 
-    <script src="chain.js"></script>
+    <h3>Executed Code:</h3>
+    <div id="output">Click the button to see the executed code...</div>
+
+    <script>
+    $(document).ready(function() {
+
+        $("#btn-chain").click(function() {
+            let code = `
+$("#box")
+    .css("background-color", "orange")  // Change color
+    .slideUp(1000)                      // Slide up
+    .slideDown(1000)                    // Slide down
+    .animate({ width: "200px", height: "200px" }, 1000)  // Resize
+    .fadeOut(1000)                      // Fade out
+    .fadeIn(1000)                       // Fade in
+    .text("Chained!");                  // Change text
+            `;
+
+            $("#box")
+                .css("background-color", "orange")  
+                .slideUp(1000)                      
+                .slideDown(1000)                    
+                .animate({ width: "200px", height: "200px" }, 1000)  
+                .fadeOut(1000)                      
+                .fadeIn(1000)                       
+                .text("Chained!");                  
+
+            $("#output").html(code);
+        });
+
+        $("#btn-reset").click(function() {
+            $("#box")
+                .stop(true, true)
+                .attr("style", "")
+                .text("Box");
+
+            $("#output").html("Click the button to see the executed code...");
+        });
+
+    });
+    </script>
 
 </body>
 </html>

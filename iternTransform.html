@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Iteration & Transformation Methods</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        h1,h2,h3{
+            text-align: center;
+        }
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        body { font-family: Arial, sans-serif; }
+        .box { padding: 10px; margin: 5px; border: 2px solid #333; display: inline-block; }
+        #output { margin-top: 20px; padding: 10px; border: 2px solid blue; background: #f0f0f0; }
+        .highlight { background-color: yellow; }
+        .btn-container { margin-bottom: 10px; }
+        .code-snippet { font-family: monospace; color: red; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="selectors.html">Selectors</a>
+        <a href="event.html">Events</a>
+        <a href="effects.html">Effects</a>
+        <a href="dom.html">DOM Manipulation</a>
+        <a href="domTraversal.html">DOM Traversal</a>
+        <a href="css.html">CSS Manipulation</a>
+        <a href="iternTransform.html">Iteration & Transformation</a>
+        <a href="chain.html">Chaining</a>
+        <a href="ajax.html">AJAX</a>
+        <a href="util.html">Utility Functions</a>
+    </nav>
+    <h2>jQuery Iteration & Transformation Methods</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Function</th>
+                <th>Syntax</th>
+                <th>Return Value</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>.each()</code></td>
+                <td><code>$(selector).each(function(index, element) { ... });</code></td>
+                <td>jQuery Object (Original Set)</td>
+                <td>Iterates over a jQuery collection and executes a function for each element.</td>
+            </tr>
+            <tr>
+                <td><code>.map()</code></td>
+                <td><code>$(selector).map(function(index, element) { return newValue; });</code></td>
+                <td>New jQuery Object</td>
+                <td>Transforms each element in a collection and returns a new jQuery object.</td>
+            </tr>
+            <tr>
+                <td><code>.filter()</code></td>
+                <td><code>$(selector).filter(filterCriteria);</code></td>
+                <td>Filtered jQuery Object</td>
+                <td>Filters elements from the set based on a selector, function, or jQuery object.</td>
+            </tr>
+            <tr>
+                <td><code>.is()</code></td>
+                <td><code>$(selector).is(criteria);</code></td>
+                <td>Boolean (true/false)</td>
+                <td>Checks if at least one element in the set matches the criteria.</td>
+            </tr>
+            <tr>
+                <td><code>.not()</code></td>
+                <td><code>$(selector).not(criteria);</code></td>
+                <td>New jQuery Object</td>
+                <td>Excludes elements that match the given criteria from the selection.</td>
+            </tr>
+            <tr>
+                <td><code>.has()</code></td>
+                <td><code>$(selector).has(childSelector);</code></td>
+                <td>New jQuery Object</td>
+                <td>Filters elements that contain at least one matching child element.</td>
+            </tr>
+            <tr>
+                <td><code>.toArray()</code></td>
+                <td><code>$(selector).toArray();</code></td>
+                <td>Array of DOM Elements</td>
+                <td>Converts the jQuery object into a native JavaScript array.</td>
+            </tr>
+            <tr>
+                <td><code>.get()</code></td>
+                <td><code>$(selector).get(index);</code></td>
+                <td>Single DOM Element</td>
+                <td>Retrieves a specific element from the jQuery object (returns a raw DOM node).</td>
+            </tr>
+            <tr>
+                <td><code>.index()</code></td>
+                <td><code>$(selector).index(element);</code></td>
+                <td>Integer (Index Position)</td>
+                <td>Finds the index of an element relative to its siblings or the entire set.</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- Output Box -->
+    <div id="output"><strong>Output:</strong></div>
+
+    <!-- Buttons for Methods -->
+    <div class="btn-container">
+        <button class="method-btn" id="each-btn">.each() - Iterate Elements</button>
+        <button class="method-btn" id="map-btn">.map() - Modify Content</button>
+        <button class="method-btn" id="filter-btn">.filter() - Filter Elements</button>
+        <button class="method-btn" id="is-btn">.is() - Check Condition</button>
+        <button class="method-btn" id="not-btn">.not() - Exclude Elements</button>
+        <button class="method-btn" id="has-btn">.has() - Contains Child</button>
+        <button class="method-btn" id="toArray-btn">.toArray() - Convert to Array</button>
+        <button class="method-btn" id="get-btn">.get() - Get Specific Element</button>
+        <button class="method-btn" id="index-btn">.index() - Get Position</button>
+        <button class="method-btn" id="reset-btn">Reset</button>
+    </div>
+
+    <!-- Sample Elements -->
+    <div id="container">
+        <p>All box have a class item and class box</p>
+        <div class="box item" id="box1">Box 1</div>
+        <div class="box item highlight" id="box2">Box 2</div>
+        <div class="box item" id="box3">Box 3</div>
+        <div class="box item" id="box4">Box 4</div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            function updateOutput(code, result) {
+                $("#output").html("<strong>Output:</strong> " + result + "<br><span class='code-snippet'>Code: " + code + "</span>");
+            }
+
+            // .each() - Iterate Over Elements
+            $("#each-btn").click(function() {
+                let code = '$(".item").each(function(index, element) { $(element).css("background", index % 2 === 0 ? "lightblue" : "lightgreen"); });';
+                $(".item").each(function(index, element) {
+                    $(element).css("background", index % 2 === 0 ? "lightblue" : "lightgreen");
+                });
+                updateOutput(code, "Each element has been updated with alternating colors.");
+            });
+
+            // .map() - Modify and Return New Set
+            $("#map-btn").click(function() {
+                let code = '$(".item").map(function(index, element) { return $(element).text() + " (Modified)"; }).get();';
+                let modified = $(".item").map(function(index, element) {
+                    return $(element).text() + " (Modified)";
+                }).get().join(", ");
+                updateOutput(code, modified);
+            });
+
+            // .filter() - Filter Elements
+            $("#filter-btn").click(function() {
+                let code = '$(".item").filter(".highlight").css("border", "3px solid red");';
+                $(".item").filter(".highlight").css("border", "3px solid red");
+                updateOutput(code, "Filtered elements now have a red border.");
+            });
+
+            // .is() - Check if At Least One Matches
+            $("#is-btn").click(function() {
+                let code = '$(".item").is(".highlight");';
+                let result = $(".item").is(".highlight");
+                updateOutput(code, result);
+            });
+
+            // .not() - Exclude Matching Elements
+            $("#not-btn").click(function() {
+                let code = '$(".item").not(".highlight").css("opacity", "0.5");';
+                $(".item").not(".highlight").css("opacity", "0.5");
+                updateOutput(code, "Non-highlighted elements are now faded.");
+            });
+
+            // .has() - Check If Element Has a Specific Child
+            $("#has-btn").click(function() {
+                let code = '$(".item").has(".child").length > 0;';
+                let result = $(".item").has(".child").length > 0;
+                updateOutput(code, result);
+            });
+
+            // .toArray() - Convert to Native Array
+            $("#toArray-btn").click(function() {
+                let code = '$(".item").toArray();';
+                let arr = $(".item").toArray().map(el => el.innerText);
+                updateOutput(code, JSON.stringify(arr));
+            });
+
+            // .get() - Get Specific Element from jQuery Set
+            $("#get-btn").click(function() {
+                let code = '$(".item").get(2);';
+                let thirdBox = $(".item").get(2);
+                updateOutput(code, thirdBox ? thirdBox.innerText : "undefined");
+            });
+
+            // .index() - Get Position of an Element
+            $("#index-btn").click(function() {
+                let code = '$("#box3").index();';
+                let position = $("#box3").index();
+                updateOutput(code, position);
+            });
+
+            // Reset Button
+            $("#reset-btn").click(function() {
+                let code = 'Reset to default state.';
+                $(".item").css({ "background": "", "border": "2px solid #333", "opacity": "1" });
+                updateOutput(code, "Reset to default state.");
+            });
+        });
+    </script>
+
+</body>
+</html>

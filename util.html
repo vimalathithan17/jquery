@@ -5,22 +5,282 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>jQuery Utility Functions Demo</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        h1,h2,h3{
+            text-align: center;
+        }
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { margin: 5px; padding: 10px; cursor: pointer; }
+        #output { margin-top: 20px; padding: 10px; border: 1px solid #ccc; background: #f9f9f9; }
+        .code { font-family: monospace; background: #eee; padding: 3px 6px; border-radius: 3px; }
+    </style>
 </head>
 <body>
-
-    <h2>jQuery Utility Functions Example</h2>
-
-    <button id="btn-each">$.each()</button>
-    <button id="btn-map">$.map()</button>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="selectors.html">Selectors</a>
+        <a href="event.html">Events</a>
+        <a href="effects.html">Effects</a>
+        <a href="dom.html">DOM Manipulation</a>
+        <a href="domTraversal.html">DOM Traversal</a>
+        <a href="css.html">CSS Manipulation</a>
+        <a href="iternTransform.html">Iteration & Transformation</a>
+        <a href="chain.html">Chaining</a>
+        <a href="ajax.html">AJAX</a>
+        <a href="util.html">Utility Functions</a>
+    </nav>
+    <h2>jQuery Utility Functions Demo</h2>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <tr>
+            <th>Function</th>
+            <th>Syntax</th>
+            <th>Description</th>
+            <th>Parameters</th>
+            <th>Callback Syntax (if applicable)</th>
+        </tr>
+    
+        <!-- $.each() for Objects/Arrays -->
+        <tr style="background-color: #ffffcc;">
+            <td><code>$.each()</code></td>
+            <td><code>$.each(object, callback)</code></td>
+            <td>Iterates over an array or object and executes a function for each element.</td>
+            <td>
+                <ul>
+                    <li><code>object</code> - The array or object to iterate over.</li>
+                    <li><code>callback</code> - Function to execute for each element.</li>
+                </ul>
+            </td>
+            <td>
+                <code>function(index, value) { /* logic */ }</code>
+            </td>
+        </tr>
+    
+        <!-- .each() for jQuery Collection -->
+        <tr style="background-color: #ffffcc;">
+            <td><code>.each()</code></td>
+            <td><code>$(selector).each(callback)</code></td>
+            <td>Iterates over a jQuery collection and executes a function on each element.</td>
+            <td>
+                <ul>
+                    <li><code>callback</code> - Function to execute on each element.</li>
+                </ul>
+            </td>
+            <td>
+                <code>function(index, element) { /* logic */ }</code>
+            </td>
+        </tr>
+    
+        <!-- $.map() for Arrays -->
+        <tr style="background-color: #ffccff;">
+            <td><code>$.map()</code></td>
+            <td><code>$.map(array, callback)</code></td>
+            <td>Transforms each array element and returns a new array.</td>
+            <td>
+                <ul>
+                    <li><code>array</code> - The array to modify.</li>
+                    <li><code>callback</code> - Function to transform elements.</li>
+                </ul>
+            </td>
+            <td>
+                <code>function(element, index) { return transformedValue; }</code>
+            </td>
+        </tr>
+    
+        <!-- .map() for jQuery Collection -->
+        <tr style="background-color: #ffccff;">
+            <td><code>.map()</code></td>
+            <td><code>$(selector).map(callback)</code></td>
+            <td>Transforms each element in a jQuery collection and returns a new jQuery object.</td>
+            <td>
+                <ul>
+                    <li><code>callback</code> - Function to transform elements.</li>
+                </ul>
+            </td>
+            <td>
+                <code>function(index, element) { return transformedValue; }</code>
+            </td>
+        </tr>
+    
+        <!-- $.merge() -->
+        <tr>
+            <td><code>$.merge()</code></td>
+            <td><code>$.merge(array1, array2)</code></td>
+            <td>Merges two arrays into the first array.</td>
+            <td>
+                <ul>
+                    <li><code>array1</code> - The target array.</li>
+                    <li><code>array2</code> - The array to be merged into <code>array1</code>.</li>
+                </ul>
+            </td>
+            <td>N/A</td>
+        </tr>
+    
+        <!-- $.grep() -->
+        <tr>
+            <td><code>$.grep()</code></td>
+            <td><code>$.grep(array, callback, invert?)</code></td>
+            <td>Filters elements in an array based on a condition.</td>
+            <td>
+                <ul>
+                    <li><code>array</code> - The array to filter.</li>
+                    <li><code>callback</code> - Function that determines inclusion.</li>
+                    <li><code>invert</code> (optional) - If <code>true</code>, reverses selection.</li>
+                </ul>
+            </td>
+            <td>
+                <code>function(element, index) { return condition; }</code>
+            </td>
+        </tr>
+    
+        <!-- $.trim() -->
+        <tr>
+            <td><code>$.trim()</code> (Deprecated)</td>
+            <td><code>$.trim(str)</code></td>
+            <td>Removes leading/trailing whitespace. <strong>Use <code>String.trim()</code> instead.</strong></td>
+            <td>
+                <ul>
+                    <li><code>str</code> - The string to trim.</li>
+                </ul>
+            </td>
+            <td>N/A</td>
+        </tr>
+    
+        <!-- $.now() -->
+        <tr>
+            <td><code>$.now()</code></td>
+            <td><code>$.now()</code></td>
+            <td>Returns the current timestamp (milliseconds since 1970).</td>
+            <td>N/A</td>
+            <td>N/A</td>
+        </tr>
+    
+        <!-- $.extend() -->
+        <tr>
+            <td><code>$.extend()</code></td>
+            <td><code>$.extend(target, obj1, obj2, ...)</code></td>
+            <td>Merges properties of objects into the target object.</td>
+            <td>
+                <ul>
+                    <li><code>target</code> - The object to extend.</li>
+                    <li><code>obj1, obj2, ...</code> - Objects to merge.</li>
+                </ul>
+            </td>
+            <td>N/A</td>
+        </tr>
+    
+        <!-- $.Deferred() -->
+        <tr>
+            <td><code>$.Deferred()</code></td>
+            <td><code>$.Deferred()</code></td>
+            <td>Creates a Deferred object for asynchronous operations.</td>
+            <td>N/A</td>
+            <td>
+                <code>$.Deferred().done(function(result) { /* handle success */ });</code>
+            </td>
+        </tr>
+    
+    </table>
+    
+    
+    <button id="btn-merge">$.merge()</button>
     <button id="btn-grep">$.grep()</button>
-    <button id="btn-typecheck">Type Checking</button>
-    <button id="btn-data">Data Handling</button>
-    <button id="btn-deferred">Deferred Example</button>
-    <button id="btn-other">Other Utilities</button>
+    <button id="btn-map">$.map()</button>
+    <button id="btn-trim">$.trim()</button>
+    <button id="btn-now">$.now()</button>
+    <button id="btn-extend">$.extend()</button>
+    <button id="btn-deferred">$.Deferred()</button>
+    <button id="btn-reset">Reset</button>
 
-    <div id="output"></div>
+    <h3>Executed Code:</h3>
+    <pre id="code-box">Click a button to see executed code.</pre>
 
-    <script src="util.js"></script>
+    <h3>Output:</h3>
+    <div id="output">Results will appear here.</div>
+
+    <script>
+        $(document).ready(function () {
+
+            function showOutput(code, result) {
+                $("#code-box").text(code);
+                $("#output").html("<strong>Output:</strong> " + JSON.stringify(result, null, 2));
+            }
+
+            // $.merge()
+            $("#btn-merge").click(function () {
+                let arr1 = [1, 2, 3], arr2 = [4, 5, 6];
+                let result = $.merge(arr1, arr2);
+                showOutput("$.merge([1,2,3], [4,5,6]);", result);
+            });
+
+            // $.grep()
+            $("#btn-grep").click(function () {
+                let numbers = [1, 2, 3, 4, 5, 6];
+                let result = $.grep(numbers, function(n) { return n % 2 === 0; });
+                showOutput("$.grep([1,2,3,4,5,6], function(n) { return n % 2 === 0; });", result);
+            });
+
+            // $.map()
+            $("#btn-map").click(function () {
+                let numbers = [1, 2, 3, 4];
+                let result = $.map(numbers, function(n) { return n * 2; });
+                showOutput("$.map([1,2,3,4], function(n) { return n * 2; });", result);
+            });
+
+            // $.trim() (Deprecated in jQuery 3.5+, using String.trim())
+            $("#btn-trim").click(function () {
+                let str = "   Hello World!   ";
+                let result = str.trim(); // Native JS alternative
+                showOutput('"   Hello World!   ".trim();', result);
+            });
+
+            // $.now()
+            $("#btn-now").click(function () {
+                let result = $.now();
+                showOutput("$.now();", result);
+            });
+
+            // $.extend()
+            $("#btn-extend").click(function () {
+                let obj1 = { name: "John" };
+                let obj2 = { age: 30 };
+                let result = $.extend({}, obj1, obj2);
+                showOutput("$.extend({}, { name: 'John' }, { age: 30 });", result);
+            });
+
+            // $.Deferred()
+            $("#btn-deferred").click(function () {
+                let deferred = $.Deferred();
+
+                deferred.done(function (msg) {
+                    showOutput("$.Deferred().done(function(msg) { console.log(msg); }).resolve('Task Done');", msg);
+                });
+
+                deferred.resolve("Task Done");
+            });
+
+            // Reset Button
+            $("#btn-reset").click(function () {
+                $("#code-box").text("Click a button to see executed code.");
+                $("#output").html("Results will appear here.");
+            });
+
+        });
+    </script>
 
 </body>
 </html>

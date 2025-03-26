@@ -3,37 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive jQuery CSS Methods Demo</title>
+    <title>jQuery CSS Methods Demonstration</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
-        .highlight { background-color: yellow; }
-        .border { border: 2px solid red; }
-        .rounded { border-radius: 15px; }
-        .box { width: 100px; height: 100px; background-color: lightblue; margin: 10px; text-align: center; line-height: 100px; }
-        .hidden { display: none; }
+        h1,h2,h3{
+            text-align: center;
+        }
+        nav {
+            background: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        td:has(code){
+            text-align: center;
+        }
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .box { width: 200px; height: 100px; background: lightblue; text-align: center; line-height: 100px; margin-bottom: 10px; }
+        button { margin: 5px; padding: 8px; }
+        pre { background: #f4f4f4; padding: 10px; border: 1px solid #ddd; white-space: pre-wrap; }
     </style>
 </head>
 <body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="selectors.html">Selectors</a>
+        <a href="event.html">Events</a>
+        <a href="effects.html">Effects</a>
+        <a href="dom.html">DOM Manipulation</a>
+        <a href="domTraversal.html">DOM Traversal</a>
+        <a href="css.html">CSS Manipulation</a>
+        <a href="iternTransform.html">Iteration & Transformation</a>
+        <a href="chain.html">Chaining</a>
+        <a href="ajax.html">AJAX</a>
+        <a href="util.html">Utility Functions</a>
+    </nav>
+    <h2>jQuery CSS Manipulation Methods</h2>
 
-    <h2>Interactive jQuery CSS Methods Example</h2>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Method</th>
+                <th>Syntax</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>.css()</code></td>
+                <td>
+                    <code>$(selector).css(property, value)</code>
+                    or
+                    <code>$(selector).css({"property1":"value1","property2:value2"})</code>
+                </td>
+                <td>Gets or sets CSS properties for selected elements.</td>
+            </tr>
+            <tr>
+                <td><code>.addClass()</code></td>
+                <td><code>$(selector).addClass(className)</code></td>
+                <td>Adds one or more classes to the selected elements.</td>
+            </tr>
+            <tr>
+                <td><code>.removeClass()</code></td>
+                <td><code>$(selector).removeClass(className)</code></td>
+                <td>Removes one or more classes from selected elements.</td>
+            </tr>
+            <tr>
+                <td><code>.toggleClass()</code></td>
+                <td><code>$(selector).toggleClass(className)</code></td>
+                <td>Adds/removes a class (toggles) based on its current state.</td>
+            </tr>
+            <tr>
+                <td><code>.hasClass()</code></td>
+                <td><code>$(selector).hasClass(className)</code></td>
+                <td>Checks if any selected element has a specific class.</td>
+            </tr>
+            <tr>
+                <td><code>.height()</code></td>
+                <td><code>$(selector).height()</code></td>
+                <td>Gets or sets the height of selected elements (excludes padding & border).</td>
+            </tr>
+            <tr>
+                <td><code>.width()</code></td>
+                <td><code>$(selector).width()</code></td>
+                <td>Gets or sets the width of selected elements (excludes padding & border).</td>
+            </tr>
+            <tr>
+                <td><code>.innerHeight()</code></td>
+                <td><code>$(selector).innerHeight()</code></td>
+                <td>Gets the height including padding (excludes border & margin).</td>
+            </tr>
+            <tr>
+                <td><code>.innerWidth()</code></td>
+                <td><code>$(selector).innerWidth()</code></td>
+                <td>Gets the width including padding (excludes border & margin).</td>
+            </tr>
+            <tr>
+                <td><code>.outerHeight()</code></td>
+                <td><code>$(selector).outerHeight(includeMargin)</code></td>
+                <td>Gets the height including padding & border (optionally margin).</td>
+            </tr>
+            <tr>
+                <td><code>.outerWidth()</code></td>
+                <td><code>$(selector).outerWidth(includeMargin)</code></td>
+                <td>Gets the width including padding & border (optionally margin).</td>
+            </tr>
+            <tr>
+                <td><code>.offset()</code></td>
+                <td><code>$(selector).offset()</code></td>
+                <td>Gets or sets the coordinates relative to the document.</td>
+            </tr>
+            <tr>
+                <td><code>.position()</code></td>
+                <td><code>$(selector).position()</code></td>
+                <td>Gets the position relative to the nearest positioned ancestor.</td>
+            </tr>
+            <tr>
+                <td><code>.scrollTop()</code></td>
+                <td><code>$(selector).scrollTop()</code></td>
+                <td>Gets or sets the vertical scroll position of an element.</td>
+            </tr>
+            <tr>
+                <td><code>.scrollLeft()</code></td>
+                <td><code>$(selector).scrollLeft()</code></td>
+                <td>Gets or sets the horizontal scroll position of an element.</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Interactive jQuery CSS Manipulation</h2>
+    <div class="box">Hello!</div>
 
-    <button id="btn-css">Change CSS</button>
-    <button id="btn-class">Toggle Class</button>
-    <button id="btn-has-class">Check Class</button>
-    <button id="btn-dimensions">Get Dimensions</button>
-    <button id="btn-show">Show</button>
-    <button id="btn-hide">Hide</button>
-    <button id="btn-toggle">Toggle</button>
-    <button id="btn-fade-in">Fade In</button>
-    <button id="btn-fade-out">Fade Out</button>
-    <button id="btn-fade-toggle">Fade Toggle</button>
-    <button id="btn-slide-up">Slide Up</button>
-    <button id="btn-slide-down">Slide Down</button>
-    <button id="btn-slide-toggle">Slide Toggle</button>
+    <div class="control-panel">
+        <h3>Class Manipulation</h3>
+        <button id="add-class">Add Class</button>
+        <button id="remove-class">Remove Class</button>
+        <button id="toggle-class">Toggle Class</button>
+        <button id="check-class">Check Class</button>
+        <p id="class-list">Classes: (None)</p>
+    </div>
 
-    <div id="box" class="box">Box</div>
+    <div class="control-panel">
+        <h3>CSS Property Manipulation</h3>
+        <input type="text" id="css-prop" placeholder="CSS Property (e.g., color)">
+        <input type="text" id="css-value" placeholder="Value (e.g., red)">
+        <button id="set-css">Set CSS</button>
+        <button id="get-css">Get CSS</button>
+    </div>
 
-    <script src="css.js"></script>
+    <div class="control-panel">
+        <h3>Size Manipulation</h3>
+        <button id="increase-width">Increase Width</button>
+        <button id="increase-height">Increase Height</button>
+        <button id="show-inner-size">Show Inner Size</button>
+        <button id="reset-size">Reset Size</button>
+    </div>
+
+    <div class="control-panel">
+        <h3>Position & Scroll</h3>
+        <button id="get-offset">Get Offset</button>
+        <button id="get-position">Get Position</button>
+        <button id="scroll-top">Scroll Top</button>
+        <button id="scroll-left">Scroll Left</button>
+        <button id="show-scroll">Show Scroll Position</button>
+    </div>
+
+    <h3>Output:</h3>
+    <pre id="output">Click a button to see results...</pre>
+
+    <script>
+        $(document).ready(function () {
+            const box = $(".box");
+            const output = $("#output");
+            const classList = $("#class-list");
+
+            function displayResult(title, code, result) {
+                output.html(
+                    `<b>${title}</b>\n<b>Executed Code:</b>\n${code}\n\n<b>Result:</b>\n${result}`
+                );
+            }
+
+            function updateClassList() {
+                let classes = box.attr("class");
+                classList.text("Classes: " + (classes ? classes : "(None)"));
+            }
+
+            $("#add-class").click(function () {
+                let code = `box.addClass("new-class")`;
+                box.addClass("new-class");
+                updateClassList();
+                displayResult("Class Added", code, "Class 'new-class' added.");
+            });
+
+            $("#remove-class").click(function () {
+                let code = `box.removeClass("new-class")`;
+                box.removeClass("new-class");
+                updateClassList();
+                displayResult("Class Removed", code, "Class 'new-class' removed.");
+            });
+
+            $("#toggle-class").click(function () {
+                let code = `box.toggleClass("new-class")`;
+                box.toggleClass("new-class");
+                updateClassList();
+                displayResult("Class Toggled", code, "Class 'new-class' toggled.");
+            });
+
+            $("#check-class").click(function () {
+                let code = `box.hasClass("new-class")`;
+                let hasClass = box.hasClass("new-class");
+                displayResult("Check Class", code, `Has 'new-class': ${hasClass}`);
+            });
+
+            $("#set-css").click(function () {
+                let prop = $("#css-prop").val();
+                let value = $("#css-value").val();
+                let code = `box.css("${prop}", "${value}")`;
+                box.css(prop, value);
+                displayResult("Set CSS", code, `Set ${prop}: ${value}`);
+            });
+
+            $("#get-css").click(function () {
+                let prop = $("#css-prop").val();
+                let code = `box.css("${prop}")`;
+                let value = box.css(prop);
+                displayResult("Get CSS", code, `${prop} = ${value}`);
+            });
+
+            $("#increase-width").click(function () {
+                let newWidth = box.width() + 20;
+                let code = `box.width(${newWidth})`;
+                box.width(newWidth);
+                displayResult("Increase Width", code, `Width increased to ${newWidth}px`);
+            });
+
+            $("#increase-height").click(function () {
+                let newHeight = box.height() + 20;
+                let code = `box.height(${newHeight})`;
+                box.height(newHeight);
+                displayResult("Increase Height", code, `Height increased to ${newHeight}px`);
+            });
+
+            $("#show-inner-size").click(function () {
+                let innerW = box.innerWidth();
+                let innerH = box.innerHeight();
+                let code = `box.innerWidth(), box.innerHeight()`;
+                displayResult("Show Inner Size", code, `Inner Width: ${innerW}px, Inner Height: ${innerH}px`);
+            });
+
+            $("#reset-size").click(function () {
+                let code = `box.width(200).height(100)`;
+                box.width(200).height(100);
+                displayResult("Reset Size", code, "Size reset to 200x100px");
+            });
+
+            $("#get-offset").click(function () {
+                let offset = box.offset();
+                let code = `box.offset()`;
+                displayResult("Get Offset", code, `Top: ${offset.top}, Left: ${offset.left}`);
+            });
+
+            $("#get-position").click(function () {
+                let position = box.position();
+                let code = `box.position()`;
+                displayResult("Get Position", code, `Top: ${position.top}, Left: ${position.left}`);
+            });
+
+            $("#scroll-top").click(function () {
+                let code = `box.scrollTop(50)`;
+                box.scrollTop(50);
+                displayResult("Scroll Top", code, "Scrolled 50px down.");
+            });
+
+            $("#scroll-left").click(function () {
+                let code = `box.scrollLeft(50)`;
+                box.scrollLeft(50);
+                displayResult("Scroll Left", code, "Scrolled 50px right.");
+            });
+
+            $("#show-scroll").click(function () {
+                let scrollTop = box.scrollTop();
+                let scrollLeft = box.scrollLeft();
+                let code = `box.scrollTop(), box.scrollLeft()`;
+                displayResult("Show Scroll Position", code, `Scroll Top: ${scrollTop}px, Scroll Left: ${scrollLeft}px`);
+            });
+        });
+    </script>
 
 </body>
 </html>
+
