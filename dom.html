@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery DOM Manipulation Demo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .box { padding: 10px; border: 2px solid black; margin: 5px; }
+        .highlight { background-color: yellow; }
+        .wrapper { border: 3px dashed blue; padding: 10px; margin: 10px; }
+    </style>
+</head>
+<body>
+
+    <h2>jQuery DOM Manipulation Example</h2>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><code>text("new text")</code></td>
+            <td>Changes the text inside an element</td>
+        </tr>
+        <tr>
+            <td><code>html("&lt;b&gt;new html&lt;/b&gt;")</code></td>
+            <td>Replaces the content with new HTML</td>
+        </tr>
+        <tr>
+            <td><code>val("new value")</code></td>
+            <td>Changes the value of an input field</td>
+        </tr>
+        <tr>
+            <td><code>append("new element")</code></td>
+            <td>Adds content at the end of an element</td>
+        </tr>
+        <tr>
+            <td><code>prepend("new element")</code></td>
+            <td>Adds content at the beginning of an element</td>
+        </tr>
+        <tr>
+            <td><code>after("new element")</code></td>
+            <td>Inserts new content after an element</td>
+        </tr>
+        <tr>
+            <td><code>before("new element")</code></td>
+            <td>Inserts new content before an element</td>
+        </tr>
+        <tr>
+            <td><code>appendTo(selector)</code></td>
+            <td>Moves an element inside another element at the end</td>
+        </tr>
+        <tr>
+            <td><code>prependTo(selector)</code></td>
+            <td>Moves an element inside another element at the beginning</td>
+        </tr>
+        <tr>
+            <td><code>remove()</code></td>
+            <td>Removes an element and its events</td>
+        </tr>
+        <tr>
+            <td><code>empty()</code></td>
+            <td>Clears all child elements inside a container</td>
+        </tr>
+        <tr>
+            <td><code>detach()</code></td>
+            <td>Removes an element but keeps its events</td>
+        </tr>
+        <tr>
+            <td><code>wrap("&lt;div&gt;")</code></td>
+            <td>Wraps an element inside another element</td>
+        </tr>
+        <tr>
+            <td><code>wrapAll("&lt;div&gt;")</code></td>
+            <td>Wraps all selected elements inside one wrapper</td>
+        </tr>
+        <tr>
+            <td><code>unwrap()</code></td>
+            <td>Removes the wrapper of an element</td>
+        </tr>
+        <tr>
+            <td><code>attr("attrName", "value")</code></td>
+            <td>Sets an attribute for an element</td>
+        </tr>
+        <tr>
+            <td><code>removeAttr("attrName")</code></td>
+            <td>Removes an attribute from an element</td>
+        </tr>
+    </table>
+
+    <button id="btn-text">Change Text</button>
+    <button id="btn-html">Change HTML</button>
+    <button id="btn-val">Change Input Value</button>
+    <button id="btn-append">Append</button>
+    <button id="btn-prepend">Prepend</button>
+    <button id="btn-after">Insert After</button>
+    <button id="btn-before">Insert Before</button>
+    <button id="btn-appendTo">Append To</button>
+    <button id="btn-prependTo">Prepend To</button>
+    <button id="btn-remove">Remove</button>
+    <button id="btn-empty">Empty</button>
+    <button id="btn-detach">Detach</button>
+    <button id="btn-wrap">Wrap</button>
+    <button id="btn-wrapAll">Wrap All</button>
+    <button id="btn-unwrap">Unwrap</button>
+    <button id="btn-attr">Set Attribute</button>
+    <button id="btn-removeAttr">Remove Attribute</button>
+
+    <div id="container" class="box">
+        <p id="content">This is a paragraph.</p>
+        <p class="text">Another paragraph.</p>
+        <input type="text" id="inputField" value="Hello">
+    </div>
+
+    <div id="detachable" class="box">Detachable Element</div>
+
+    <script src="dom.js"></script>
+
+</body>
+</html>

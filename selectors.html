@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Selectors Demo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .highlight { background-color: yellow; }
+        .border { border: 2px solid red; }
+    </style>
+</head>
+<body>
+
+    <h2>jQuery Selectors Example</h2>
+    <table>
+        <tr>
+            <th>Selector</th>
+            <th>Usage</th>
+        </tr>
+        <tr>
+            <td><code>$("#id")</code></td>
+            <td>Select element by id</td>
+        </tr>
+        <tr>
+            <td><code>$(".class")</code></td>
+            <td>Select elements by class</td>
+        </tr>
+        <tr>
+            <td><code>$("element")</code></td>
+            <td>Select elements by tag name (e.g., <code>$("p")</code> for all &lt;p&gt; tags)</td>
+        </tr>
+        <tr>
+            <td><code>$("*")</code></td>
+            <td>Select all elements</td>
+        </tr>
+        <tr>
+            <td><code>$("parent child")</code></td>
+            <td>Select descendants (any level deep)</td>
+        </tr>
+        <tr>
+            <td><code>$("parent &gt; child")</code></td>
+            <td>Select direct children</td>
+        </tr>
+        <tr>
+            <td><code>$("prev + next")</code></td>
+            <td>Select next adjacent sibling</td>
+        </tr>
+        <tr>
+            <td><code>$("prev ~ next")</code></td>
+            <td>Select all siblings after <code>prev</code></td>
+        </tr>
+        <tr>
+            <td><code>$("[attribute]")</code></td>
+            <td>Select elements with a specific attribute</td>
+        </tr>
+        <tr>
+            <td><code>$("[name='value']")</code></td>
+            <td>Select elements where the attribute has a specific value</td>
+        </tr>
+        <tr>
+            <td><code>$("[attr^='val']")</code></td>
+            <td>Attribute starts with value</td>
+        </tr>
+        <tr>
+            <td><code>$("[attr$='val']")</code></td>
+            <td>Attribute ends with value</td>
+        </tr>
+        <tr>
+            <td><code>$("[attr*='val']")</code></td>
+            <td>Attribute contains value</td>
+        </tr>
+        <tr>
+            <td><code>$(":input")</code></td>
+            <td>Select all form input elements</td>
+        </tr>
+        <tr>
+            <td><code>$(":text")</code></td>
+            <td>Select all text inputs</td>
+        </tr>
+        <tr>
+            <td><code>$(":checkbox")</code></td>
+            <td>Select all checkboxes</td>
+        </tr>
+        <tr>
+            <td><code>$(":radio")</code></td>
+            <td>Select all radio buttons</td>
+        </tr>
+        <tr>
+            <td><code>$(":checked")</code></td>
+            <td>Select checked elements</td>
+        </tr>
+        <tr>
+            <td><code>$(":first")</code></td>
+            <td>Select first element in a group</td>
+        </tr>
+        <tr>
+            <td><code>$(":last")</code></td>
+            <td>Select last element in a group</td>
+        </tr>
+        <tr>
+            <td><code>$(":even")</code></td>
+            <td>Select elements with even index (0-based)</td>
+        </tr>
+        <tr>
+            <td><code>$(":odd")</code></td>
+            <td>Select elements with odd index</td>
+        </tr>
+        <tr>
+            <td><code>$(":visible")</code></td>
+            <td>Select visible elements</td>
+        </tr>
+        <tr>
+            <td><code>$(":hidden")</code></td>
+            <td>Select hidden elements</td>
+        </tr>
+        <tr>
+            <td><code>$(":contains('text')")</code></td>
+            <td>Select elements that contain specific text</td>
+        </tr>
+    </table>
+    <button id="btn">Click to Apply Selectors</button>
+
+    <div id="container">
+        <p id="para1">Paragraph 1</p>
+        <p class="para">Paragraph 2 (class="para")</p>
+        <p class="para special">Paragraph 3 (class="para special")</p>
+        <span>Span Element</span>
+        <input type="text" name="username" placeholder="Enter Name">
+        <input type="checkbox" class="check"> Checkbox
+        <input type="radio" name="gender"> Male
+        <input type="radio" name="gender" checked> Female
+    </div>
+
+    <ul>
+        <li>Item 1</li>
+        <li class="para">Item 2 (class="para")</li>
+        <li>Item 3</li>
+    </ul>
+
+    <script src="selectors.js"></script>
+
+</body>
+</html>

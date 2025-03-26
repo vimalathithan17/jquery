@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Effects Demo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            margin: 10px;
+            text-align: center;
+            line-height: 100px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>jQuery Effects Methods Example</h2>
+
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><code>show(speed)</code></td>
+            <td>Gradually shows the element</td>
+        </tr>
+        <tr>
+            <td><code>hide(speed)</code></td>
+            <td>Gradually hides the element</td>
+        </tr>
+        <tr>
+            <td><code>toggle(speed)</code></td>
+            <td>Toggles visibility</td>
+        </tr>
+        <tr>
+            <td><code>fadeIn(speed)</code></td>
+            <td>Fades in the element</td>
+        </tr>
+        <tr>
+            <td><code>fadeOut(speed)</code></td>
+            <td>Fades out the element</td>
+        </tr>
+        <tr>
+            <td><code>fadeToggle(speed)</code></td>
+            <td>Toggles fade effect</td>
+        </tr>
+        <tr>
+            <td><code>fadeTo(speed, opacity)</code></td>
+            <td>Fades to a specific opacity</td>
+        </tr>
+        <tr>
+            <td><code>slideDown(speed)</code></td>
+            <td>Slides the element down</td>
+        </tr>
+        <tr>
+            <td><code>slideUp(speed)</code></td>
+            <td>Slides the element up</td>
+        </tr>
+        <tr>
+            <td><code>slideToggle(speed)</code></td>
+            <td>Toggles slide effect</td>
+        </tr>
+        <tr>
+            <td><code>animate({properties}, speed)</code></td>
+            <td>Animates CSS properties</td>
+        </tr>
+        <tr>
+            <td><code>stop()</code></td>
+            <td>Stops the current animation</td>
+        </tr>
+        <tr>
+            <td><code>delay(ms)</code></td>
+            <td>Delays an animation</td>
+        </tr>
+    </table>
+    <button id="btn-show">Show</button>
+    <button id="btn-hide">Hide</button>
+    <button id="btn-toggle">Toggle</button>
+    <button id="btn-fadein">Fade In</button>
+    <button id="btn-fadeout">Fade Out</button>
+    <button id="btn-fadetoggle">Fade Toggle</button>
+    <button id="btn-fadeto">Fade To 50%</button>
+    <button id="btn-slidedown">Slide Down</button>
+    <button id="btn-slideup">Slide Up</button>
+    <button id="btn-slidetoggle">Slide Toggle</button>
+    <button id="btn-animate">Animate</button>
+    <button id="btn-stop">Stop</button>
+    <button id="btn-delay">Delayed Animation</button>
+
+    <div id="box" class="box">Box</div>
+
+    <script src="effects.js"></script>
+
+</body>
+</html>

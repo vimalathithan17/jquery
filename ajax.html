@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery AJAX - All Methods</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #loading { display: none; color: red; }
+        #output { margin-top: 10px; white-space: pre-wrap; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+        th { background-color: lightgray; }
+    </style>
+</head>
+<body>
+
+    <h2>jQuery AJAX - All Methods</h2>
+
+    <button id="btn-get">$.get()</button>
+    <button id="btn-post">$.post()</button>
+    <button id="btn-getjson">$.getJSON()</button>
+    <button id="btn-put">PUT Request</button>
+    <button id="btn-delete">DELETE Request</button>
+    <button id="btn-parsejson">$.parseJSON()</button>
+    <button id="btn-param">$.param()</button>
+
+    <div id="loading">Loading...</div>
+    <div id="output"></div>
+
+    <h3>AJAX Methods Table</h3>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Syntax</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>$.get()</td>
+            <td>$.get(url, data).done().fail().always()</td>
+            <td>Fetches data using GET request</td>
+        </tr>
+        <tr>
+            <td>$.post()</td>
+            <td>$.post(url, data).done().fail().always()</td>
+            <td>Sends data using POST request</td>
+        </tr>
+        <tr>
+            <td>$.getJSON()</td>
+            <td>$.getJSON(url).done().fail().always()</td>
+            <td>Fetches JSON data using GET</td>
+        </tr>
+        <tr>
+            <td>$.ajax()</td>
+            <td>$.ajax({options}).done().fail().always()</td>
+            <td>Custom AJAX request</td>
+        </tr>
+        <tr>
+            <td>$.parseJSON()</td>
+            <td>$.parseJSON(jsonString)</td>
+            <td>Parses a JSON string to an object</td>
+        </tr>
+        <tr>
+            <td>$.param()</td>
+            <td>$.param(object)</td>
+            <td>Serializes an object into a query string</td>
+        </tr>
+    </table>
+
+    <script src="ajax.js"></script>
+
+</body>
+</html>
